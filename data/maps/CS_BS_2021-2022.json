@@ -1,0 +1,43 @@
+{
+  "major_id": "CS_BS_2021_2022",
+  "catalog_year": "2021-2022",
+  "recommended_order": [
+    "COSC 1336", "ENGL 1301", "HIST 1377", "GOVT 2306", "MATH 2413",
+    "COSC 1437", "ENGL 1302", "HIST 1378", "GOVT 2305", "MATH 2414",
+    "COSC 2436", "COSC 2425", "MATH 2318", "CORE LPHIL", "NAT SCI LEC 1", "NAT SCI LAB 1",
+    "COSC 3360", "COSC 3336", "NAT SCI LEC 2", "NAT SCI LAB 2", "CORE SBS",
+    "COSC 3340", "COSC 3320", "MATH 3339", "ELECTIVE 1", "CORE WID",
+    "COSC 3380", "COSC 4351", "ELECTIVE 2", "ELECTIVE 3",
+    "ADV COSC 1", "ADV COSC 2", "ELECTIVE 4", "ELECTIVE 5",
+    "ADV COSC 3", "ADV COSC 4"
+  ],
+  "courses": [
+    { "code": "COSC 1336", "name": "Computer Science Programming", "credits": 3, "prereqs": [] },
+    { "code": "ENGL 1301", "name": "First Year Writing I", "credits": 3, "prereqs": [] },
+    { "code": "HIST 1377", "name": "US to 1877", "credits": 3, "prereqs": [] },
+    { "code": "GOVT 2306", "name": "US and Texas Constitutions", "credits": 3, "prereqs": [] },
+    { "code": "MATH 2413", "name": "Calculus I", "credits": 4, "prereqs": [] },
+
+    { "code": "COSC 1437", "name": "Intro to Programming", "credits": 4, "prereqs": ["COSC 1336"] },
+    { "code": "ENGL 1302", "name": "First Year Writing II", "credits": 3, "prereqs": ["ENGL 1301"] },
+    { "code": "HIST 1378", "name": "US since 1877", "credits": 3, "prereqs": [] },
+    { "code": "GOVT 2305", "name": "US Government", "credits": 3, "prereqs": [] },
+    { "code": "MATH 2414", "name": "Calculus II", "credits": 4, "prereqs": ["MATH 2413"] },
+
+    { "code": "COSC 2436", "name": "Programming and Data Structures", "credits": 4, "prereqs": ["COSC 1437"] },
+    { "code": "COSC 2425", "name": "Computer Organization", "credits": 4, "prereqs": ["COSC 1437"] },
+    { "code": "MATH 2318", "name": "Linear Algebra", "credits": 3, "prereqs": [] },
+    { "code": "COSC 3360", "name": "Operating Systems", "credits": 3, "prereqs": ["COSC 2436"] },
+    { "code": "COSC 3336", "name": "Computing Structures", "credits": 3, "prereqs": ["COSC 2436"] },
+    { "code": "COSC 3340", "name": "Automata and Computability", "credits": 3, "prereqs": ["COSC 3336"] },
+    { "code": "COSC 3320", "name": "Algorithms and Complexity", "credits": 3, "prereqs": ["COSC 2436"] },
+    { "code": "MATH 3339", "name": "Statistics for Sciences", "credits": 3, "prereqs": [] },
+    { "code": "COSC 3380", "name": "Database Systems", "credits": 3, "prereqs": ["COSC 2436"] },
+    { "code": "COSC 4351", "name": "Fundamentals of Software Engineering", "credits": 3, "prereqs": ["COSC 3320"] },
+
+    { "code": "ADV COSC 1", "name": "Advanced COSC Elective", "credits": 3, "prereqs": ["COSC 3320"] },
+    { "code": "ADV COSC 2", "name": "Advanced COSC Elective", "credits": 3, "prereqs": ["COSC 3320"] },
+    { "code": "ADV COSC 3", "name": "Advanced COSC Elective", "credits": 3, "prereqs": ["COSC 3320"] },
+    { "code": "ADV COSC 4", "name": "Advanced COSC Elective", "credits": 3, "prereqs": ["COSC 3320"] }
+  ]
+}

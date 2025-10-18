@@ -1,3 +1,21 @@
+Metadata-Version: 2.4
+Name: uh-grad-planner
+Version: 0.2.0
+Summary: UH graduation schedule planner - hackathon MVP with Gemini integration
+Author-email: UH CodeRED Team <team@example.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pydantic>=2.8
+Requires-Dist: pdfplumber>=0.11
+Requires-Dist: beautifulsoup4>=4.12
+Requires-Dist: lxml>=5.2
+Requires-Dist: requests>=2.32
+Requires-Dist: networkx>=3.3
+Requires-Dist: google-genai>=0.3
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
+
 # UH Grad Planner (Hackathon MVP)
 
 ## Inputs
