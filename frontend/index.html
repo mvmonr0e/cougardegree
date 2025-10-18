@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CougarDegree - UH Degree Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/CougarDegreeLogo.png" alt="CougarDegree Logo" class="logo">
+                <span class="logo-text">CougarDegree</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+                <button class="nav-login-btn">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <h1 class="hero-title">Degree Planning</h1>
+            <p class="hero-description">
+                Visualize your entire University of Houston academic journey. 
+                CougarDegree helps you plan, track, and optimize your degree timeline for success.
+            </p>
+            <button class="get-started-btn">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Input Section -->
+    <section class="input-section">
+        <div class="input-container">
+            <h2>Let's Plan Your Degree</h2>
+            <form id="degreeForm" class="degree-form">
+                <div class="form-group">
+                    <label for="major">Major</label>
+                    <select id="major" name="major" required>
+                        <option value="">Select your major</option>
+                        <option value="cs">Bachelor of Science in Computer Science</option>
+                        <option value="engineering">Bachelor of Science in Engineering</option>
+                        <option value="business">Bachelor of Business Administration</option>
+                        <option value="biology">Bachelor of Science in Biology</option>
+                        <option value="psychology">Bachelor of Science in Psychology</option>
+                        <option value="nursing">Bachelor of Science in Nursing</option>
+                        <option value="education">Bachelor of Science in Education</option>
+                        <option value="architecture">Bachelor of Architecture</option>
+                        <option value="pharmacy">Bachelor of Science in Pharmacy</option>
+                        <option value="social-work">Bachelor of Social Work</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="startSemester">Start Semester</label>
+                    <select id="startSemester" name="startSemester" required>
+                        <option value="">Select start semester</option>
+                        <option value="fall2024">Fall 2024</option>
+                        <option value="spring2025">Spring 2025</option>
+                        <option value="fall2025">Fall 2025</option>
+                        <option value="spring2026">Spring 2026</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="classesTaken">Classes Taken So Far</label>
+                    <textarea 
+                        id="classesTaken" 
+                        name="classesTaken" 
+                        placeholder="Enter course codes separated by commas (e.g., ENGL 1301, MATH 2413, HIST 1301)"
+                        rows="4"
+                    ></textarea>
+                    <small class="help-text">Enter course codes separated by commas. Leave empty if you're just starting.</small>
+                </div>
+
+                <button type="submit" class="generate-btn">Generate Degree Plan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="resultsSection" class="results-section" style="display: none;">
+        <div class="results-container">
+            <h2>Your Personalized Degree Plan</h2>
+            
+            <!-- Degree Progress Overview -->
+            <div class="plan-overview">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h3>Degree Progress</h3>
+                        <div class="progress-percentage" id="progressPercentage">0%</div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">0 of 120 credits completed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Semester Plan -->
+            <div class="degree-plan" id="degreePlan">
+                <!-- Degree plan will be generated here -->
+            </div>
+            <button id="editPlanBtn" class="edit-btn">Edit Plan</button>
+        </div>
+    </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 CougarDegree. Built for University of Houston students.</p>
+            <p>Powered by CougarGrades data and Google Gemini AI</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
