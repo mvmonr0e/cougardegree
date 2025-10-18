@@ -1,1 +1,1 @@
-# cougar-scheduler
+# cougar-degree
