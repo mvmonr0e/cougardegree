@@ -5,9 +5,14 @@ class CougarDegreePlanner {
         this.resultsSection = document.getElementById('resultsSection');
         this.degreePlan = document.getElementById('degreePlan');
         this.editBtn = document.getElementById('editPlanBtn');
+        this.loadingSpinner = document.getElementById('loadingSpinner');
+        
+        // Backend API configuration
+        this.apiBaseUrl = 'http://localhost:3001/api';
         
         this.initializeEventListeners();
         this.initializeSampleData();
+        this.loadAvailableMajors();
     }
 
     initializeEventListeners() {
@@ -149,8 +154,32 @@ class CougarDegreePlanner {
             const takenClasses = classesTaken ? 
                 classesTaken.split(',').map(code => code.trim().toUpperCase()) : [];
 
-            // Generate degree plan
-            const degreePlan = this.generateDegreePlan(major, startSemester, takenClasses);
+            // Try to generate degree plan using AI backend first
+            let degreePlan;
+            try {
+                console.log('🚀 Attempting to generate degree plan with AI...');
+                console.log('📝 Major:', major);
+                console.log('📝 Taken classes:', takenClasses);
+                degreePlan = await this.generateDegreePlanWithAI(major, takenClasses);
+                console.log('✅ AI degree plan generated successfully!');
+                console.log('📊 AI degree plan:', degreePlan);
+            } catch (aiError) {
+                console.error('❌ AI backend failed, falling back to local generation:', aiError);
+                console.error('❌ AI Error details:', aiError.message);
+                console.error('❌ AI Error stack:', aiError.stack);
+                
+                // Show user-friendly error message
+                if (aiError.message.includes('timeout')) {
+                    this.showError('AI request timed out. The AI model is taking too long to respond. Please try again.');
+                    return;
+                } else if (aiError.message.includes('Failed to fetch')) {
+                    this.showError('Cannot connect to the AI service. Please check if the backend server is running.');
+                    return;
+                }
+                
+                // Fallback to local generation
+                degreePlan = this.generateDegreePlan(major, startSemester, takenClasses);
+            }
             
             // Display results
             this.displayDegreePlan(degreePlan);
@@ -165,7 +194,7 @@ class CougarDegreePlanner {
             
         } catch (error) {
             console.error('Error generating degree plan:', error);
-            alert('Error generating degree plan. Please try again.');
+            this.showError(`Error generating degree plan: ${error.message}. Please try again.`);
         }
     }
 
@@ -174,15 +203,52 @@ class CougarDegreePlanner {
         this.degreePlan.innerHTML = `
             <div class="loading">
                 <div class="loading-spinner"></div>
-                <p>Generating your personalized degree plan...</p>
+                <h3>Generating your personalized degree plan...</h3>
+                <p class="loading-text">🤖 AI is analyzing course requirements and creating your 4-year plan</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="loading-subtext">This may take 30-60 seconds</p>
             </div>
         `;
     }
 
     generateDegreePlan(major, startSemester, takenClasses) {
-        const majorData = this.degreeRequirements[major];
+        // Map full major names to keys
+        const majorMapping = {
+            'Computer Science': 'cs',
+            'Software Engineering': 'cs',
+            'Data Science': 'cs',
+            'Information Technology': 'cs',
+            'Cybersecurity': 'cs',
+            'Computer Information Systems': 'cs',
+            'Management Information Systems': 'cs',
+            'Engineering': 'engineering',
+            'Business Administration': 'business',
+            'Marketing': 'business',
+            'Finance': 'business',
+            'Accounting': 'business',
+            'Psychology': 'psychology',
+            'Biology': 'biology',
+            'Chemistry': 'chemistry',
+            'Mathematics': 'mathematics',
+            'Physics': 'physics',
+            'Nursing': 'nursing',
+            'Education': 'education'
+        };
+        
+        // Handle both full names and old lowercase values
+        let majorKey;
+        if (majorMapping[major]) {
+            majorKey = majorMapping[major];
+        } else if (major.toLowerCase() === 'computerscience' || major.toLowerCase() === 'cs') {
+            majorKey = 'cs';
+        } else {
+            majorKey = major.toLowerCase();
+        }
+        const majorData = this.degreeRequirements[majorKey];
         if (!majorData) {
-            throw new Error('Invalid major selected');
+            throw new Error(`Invalid major selected: ${major}. Available majors: ${Object.keys(majorMapping).join(', ')}`);
         }
 
         const allCourses = [...majorData.required, ...majorData.electives];
@@ -290,7 +356,7 @@ class CougarDegreePlanner {
                                         </div>
                                     `).join('')}
                                 </div>
-                                <div class="semester-total">Total: ${semester.totalCredits} Credits</div>
+                                <div class="semester-total">Total: ${semester.courses.reduce((sum, course) => sum + course.credits, 0)} Credits</div>
                             </div>
                         `).join('')}
                     </div>
@@ -358,6 +424,153 @@ class CougarDegreePlanner {
             behavior: 'smooth',
             block: 'start'
         });
+    }
+
+    // API Integration Methods
+    async loadAvailableMajors() {
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/majors`);
+            const data = await response.json();
+            
+            if (data.success) {
+                this.populateMajorDropdown(data.data);
+            }
+        } catch (error) {
+            console.warn('Failed to load majors from API, using local data:', error);
+        }
+    }
+
+    populateMajorDropdown(majors) {
+        const majorSelect = document.getElementById('major');
+        if (majorSelect) {
+            // Clear existing options except the first one
+            majorSelect.innerHTML = '<option value="">Select your major</option>';
+            
+            majors.forEach(major => {
+                const option = document.createElement('option');
+                option.value = major; // Use full major name as value
+                option.textContent = major;
+                majorSelect.appendChild(option);
+            });
+        }
+    }
+
+    async generateDegreePlanWithAI(major, currentCourses = []) {
+        try {
+            console.log('🤖 Calling AI backend...', `${this.apiBaseUrl}/degree-plan`);
+            console.log('📝 Request data:', { major, currentCourses });
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+            const response = await fetch(`${this.apiBaseUrl}/degree-plan`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    major: major,
+                    credits: 120,
+                    preferences: {
+                        focus: 'general',
+                        difficulty: 'balanced',
+                        schedule: 'full-time'
+                    },
+                    currentCourses: currentCourses
+                }),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            console.log('📡 Response status:', response.status);
+            console.log('📡 Response ok:', response.ok);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('📊 AI Response data:', data);
+            
+            if (data.success) {
+                console.log('✅ AI data converted successfully');
+                return this.convertAIDegreePlan(data.data);
+            } else {
+                throw new Error(data.message || 'Failed to generate degree plan');
+            }
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                console.error('❌ AI API Timeout: Request took too long (>30s)');
+                throw new Error('AI request timed out. Please try again.');
+            }
+            console.error('❌ AI API Error:', error);
+            throw error;
+        }
+    }
+
+    convertAIDegreePlan(aiData) {
+        console.log('🔄 Converting AI data...', aiData);
+        
+        // Convert AI response format to our local format
+        const degreePlan = aiData.degreePlan || aiData;
+        console.log('📋 Degree plan data:', degreePlan);
+        
+        // Calculate progress based on taken classes
+        const takenClasses = this.getTakenClasses();
+        const allCourses = degreePlan.semesters.flatMap(sem => sem.courses);
+        const takenCourses = allCourses.filter(course => 
+            takenClasses.includes(course.code)
+        );
+        const completedCredits = takenCourses.reduce((sum, course) => sum + course.credits, 0);
+        const progressPercentage = Math.round((completedCredits / degreePlan.totalCredits) * 100);
+        
+        const converted = {
+            major: degreePlan.major,
+            totalCredits: degreePlan.totalCredits,
+            semesters: degreePlan.semesters.map(sem => ({
+                name: `Semester ${sem.semester}`,
+                courses: sem.courses.map(course => ({
+                    code: course.code,
+                    name: course.name,
+                    credits: course.credits,
+                    prerequisites: course.prerequisites || [],
+                    type: course.type === 'major prerequisites' ? 'required' : 
+                          course.type === 'general education' ? 'general' : 
+                          course.type === 'major core' ? 'required' : 'elective'
+                }))
+            })),
+            required: degreePlan.coreCourses || [],
+            electives: degreePlan.electiveCourses || [],
+            general: degreePlan.generalEducation || [],
+            completedCredits: completedCredits,
+            progressPercentage: progressPercentage,
+            recommendations: aiData.recommendations || [],
+            timeline: aiData.timeline || '4 years (8 semesters)',
+            metadata: aiData.metadata || {}
+        };
+        
+        console.log('✅ Converted data:', converted);
+        return converted;
+    }
+
+    getTakenClasses() {
+        const classesTakenInput = document.getElementById('classesTaken');
+        if (classesTakenInput && classesTakenInput.value.trim()) {
+            return classesTakenInput.value.split(',').map(code => code.trim().toUpperCase());
+        }
+        return [];
+    }
+
+    showError(message) {
+        this.resultsSection.style.display = 'block';
+        this.degreePlan.innerHTML = `
+            <div class="error-message">
+                <h3>⚠️ Error</h3>
+                <p>${message}</p>
+                <button onclick="location.reload()" class="retry-btn">Try Again</button>
+            </div>
+        `;
     }
 }
 

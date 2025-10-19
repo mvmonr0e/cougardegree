@@ -583,3 +583,37 @@ body {
         gap: 4px;
     }
 }
+
+/* Loading Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1a365d, #2d5a87);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+@keyframes progress {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+}
+
+.loading-text {
+    color: #4a5568;
+    margin: 10px 0;
+}
+
+.loading-subtext {
+    color: #718096;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
