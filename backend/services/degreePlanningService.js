@@ -9,15 +9,45 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemi
 class DegreePlanningService {
   constructor() {
     this.degreesPath = path.join(__dirname, '..', 'degrees');
-    this.majorMapping = {
-      'Computer Science': 'cosc_bs.json',
-      'Computer Information Systems': 'cis_bs.json',
-      'Physics': 'phys_bs.json',
-      'Mathematics': 'math_bs.json',
-      'Chemistry': 'chem_bs.json'
-    };
+    // Load all available degree files dynamically
+    this.majorMapping = this.loadAllDegreeFiles();
     // Load UH core courses
     this.uhCoreCourses = this.loadUHCoreCourses();
+    console.log(`📚 Loaded ${Object.keys(this.majorMapping).length} degree programs`);
+  }
+
+  /**
+   * Load all degree files from the degrees directory
+   */
+  loadAllDegreeFiles() {
+    try {
+      const files = fs.readdirSync(this.degreesPath);
+      const degreeFiles = files.filter(f => f.endsWith('.json') && f !== 'uh_core.json');
+      
+      const mapping = {};
+      degreeFiles.forEach(filename => {
+        try {
+          const filePath = path.join(this.degreesPath, filename);
+          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+          if (data.major) {
+            mapping[data.major] = filename;
+          }
+        } catch (error) {
+          console.error(`Error loading ${filename}:`, error.message);
+        }
+      });
+      
+      return mapping;
+    } catch (error) {
+      console.error('Error loading degree files:', error);
+      return {
+        'B.S. in Computer Science': 'cosc_bs.json',
+        'B.S. in Computer Information Systems': 'cis_bs.json',
+        'B.S. in Physics': 'phys_bs.json',
+        'B.S. in Mathematics': 'math_bs.json',
+        'B.S. in Chemistry': 'chem_bs.json'
+      };
+    }
   }
 
   /**
@@ -90,7 +120,7 @@ class DegreePlanningService {
   /**
    * Generate a degree plan using Gemini AI
    */
-  async generateDegreePlan({ major, credits, preferences, currentCourses }) {
+  async generateDegreePlan({ major, credits, preferences, currentCourses, startSemester }) {
     try {
       console.log(`🎓 Generating degree plan for ${major} using Gemini AI...`);
       
@@ -101,7 +131,7 @@ class DegreePlanningService {
       }
 
       // For now, return a working template while we debug Gemini
-      return this.generateTemplatePlan(degreeData, currentCourses);
+      return this.generateTemplatePlan(degreeData, currentCourses, startSemester);
       
     } catch (error) {
       console.error('Error in generateDegreePlan:', error);
@@ -112,7 +142,7 @@ class DegreePlanningService {
   /**
    * Generate a template-based degree plan (working solution)
    */
-  generateTemplatePlan(degreeData, currentCourses) {
+  generateTemplatePlan(degreeData, currentCourses, startSemester) {
     console.log('📋 Generating template-based degree plan...');
     
     // Get all courses organized by type
@@ -131,12 +161,11 @@ class DegreePlanningService {
     // Track used courses
     const usedCourseIds = new Set();
     
+    // Generate semester names based on start semester
+    const semesterNames = this.generateSemesterNames(startSemester || 'Fall 2025');
+    
     // Create 8 semesters
     const semesters = [];
-    const semesterNames = [
-      'Fall 2025', 'Spring 2026', 'Fall 2026', 'Spring 2027',
-      'Fall 2027', 'Spring 2028', 'Fall 2028', 'Spring 2029'
-    ];
     
     for (let i = 0; i < 8; i++) {
       const semesterNumber = i + 1;
@@ -195,9 +224,13 @@ class DegreePlanningService {
     let totalCredits = 0;
     const minCredits = 12;
     const targetCredits = 15;
+    const maxCourses = 5; // Limit to 5 courses per semester
     
     // Helper to check if course is available
     const isAvailable = (course) => !usedCourseIds.has(course.id);
+    
+    // Helper to check if we can add more courses
+    const canAddMore = () => courses.length < maxCourses && totalCredits < targetCredits;
     
     // Semester 1: Foundation courses
     if (semesterNumber === 1) {
@@ -207,7 +240,7 @@ class DegreePlanningService {
       const cosc1 = allCourses.find(c => c.id === 'COSC 1336' && isAvailable(c));
       
       [english1, history1, math1, cosc1].forEach(course => {
-        if (course && totalCredits + course.credits <= targetCredits) {
+        if (course && canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -222,7 +255,7 @@ class DegreePlanningService {
       const cosc2 = allCourses.find(c => c.id === 'COSC 1437' && isAvailable(c));
       
       [english2, history2, govt1, cosc2].forEach(course => {
-        if (course && totalCredits + course.credits <= targetCredits) {
+        if (course && canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -234,7 +267,7 @@ class DegreePlanningService {
       // Add available core courses
       const availableCore = coreCourses.filter(c => isAvailable(c) && c.level <= 2000);
       for (const course of availableCore.slice(0, 1)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -245,7 +278,7 @@ class DegreePlanningService {
         isAvailable(c) && (c.id.includes('PHYS') || c.id.includes('CHEM'))
       );
       for (const course of availableScience.slice(0, 1)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -254,7 +287,7 @@ class DegreePlanningService {
       // Add lower-level major courses
       const availableMajor = majorCourses.filter(c => isAvailable(c) && c.level <= 2000);
       for (const course of availableMajor.slice(0, 2)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -266,7 +299,7 @@ class DegreePlanningService {
       // Add any remaining core courses
       const availableCore = coreCourses.filter(c => isAvailable(c));
       for (const course of availableCore.slice(0, 1)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -275,7 +308,7 @@ class DegreePlanningService {
       // Add more science courses or labs
       const availableScience = scienceCourses.filter(c => isAvailable(c));
       for (const course of availableScience.slice(0, 1)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -284,7 +317,7 @@ class DegreePlanningService {
       // Add 3000-level major courses
       const available3000 = majorCourses.filter(c => isAvailable(c) && c.level === 3000);
       for (const course of available3000.slice(0, 2)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -295,7 +328,7 @@ class DegreePlanningService {
     else {
       const advancedCourses = majorCourses.filter(c => isAvailable(c) && c.level >= 3000);
       for (const course of advancedCourses.slice(0, 4)) {
-        if (totalCredits + course.credits <= targetCredits) {
+        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
         }
@@ -306,7 +339,7 @@ class DegreePlanningService {
     if (totalCredits < minCredits && electiveCourses && electiveCourses.length > 0) {
       const availableElectives = electiveCourses.filter(c => isAvailable(c));
       for (const elective of availableElectives) {
-        if (totalCredits >= targetCredits) break;
+        if (!canAddMore() || totalCredits >= targetCredits) break;
         if (totalCredits + elective.credits <= targetCredits) {
           courses.push(elective);
           totalCredits += elective.credits;
@@ -318,7 +351,7 @@ class DegreePlanningService {
     if (totalCredits < minCredits) {
       const remainingCourses = allCourses.filter(c => isAvailable(c));
       for (const course of remainingCourses) {
-        if (totalCredits >= minCredits) break;
+        if (!canAddMore() || totalCredits >= minCredits) break;
         if (totalCredits + course.credits <= targetCredits) {
           courses.push(course);
           totalCredits += course.credits;
@@ -349,6 +382,31 @@ class DegreePlanningService {
       console.error(`Error loading degree data for ${major}:`, error);
       return null;
     }
+  }
+
+  /**
+   * Generate semester names based on start semester
+   */
+  generateSemesterNames(startSemester) {
+    // Parse the start semester (e.g., "Fall 2025")
+    const [season, yearStr] = startSemester.split(' ');
+    let year = parseInt(yearStr);
+    let isFall = season.toLowerCase() === 'fall';
+    
+    const semesterNames = [];
+    
+    for (let i = 0; i < 8; i++) {
+      if (isFall) {
+        semesterNames.push(`Fall ${year}`);
+        isFall = false; // Next is spring
+      } else {
+        semesterNames.push(`Spring ${year + 1}`);
+        isFall = true; // Next is fall
+        year++; // Increment year after spring
+      }
+    }
+    
+    return semesterNames;
   }
 
   /**

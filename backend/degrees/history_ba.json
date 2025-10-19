@@ -1,0 +1,182 @@
+{
+  "university": "University of Houston",
+  "major": "B.A. in History",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
+    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "U.S. History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "U.S. History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "HIST 1376",
+      "name": "The United States to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1377",
+      "name": "The United States since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "HIST 2351",
+      "name": "World Civilizations I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "HIST 2353",
+      "name": "World Civilizations II",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "HIST 3368",
+      "name": "History of Texas",
+      "credits": 3,
+      "prerequisites": [
+        "HIST 1377"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "HIST 3369",
+      "name": "African American History",
+      "credits": 3,
+      "prerequisites": [
+        "HIST 1377"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "HIST 3374",
+      "name": "Modern European History",
+      "credits": 3,
+      "prerequisites": [
+        "HIST 2353"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "HIST 3394",
+      "name": "The American West",
+      "credits": 3,
+      "prerequisites": [
+        "HIST 1377"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "SPAN 2311",
+      "name": "Intermediate Spanish I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Core",
+      "level": 2000
+    },
+    {
+      "id": "SPAN 2312",
+      "name": "Intermediate Spanish II",
+      "credits": 3,
+      "prerequisites": [
+        "SPAN 2311"
+      ],
+      "requirement_type": "Major Core",
+      "level": 2000
+    },
+    {
+      "id": "HIST 4301",
+      "name": "Historical Research Methods",
+      "credits": 3,
+      "prerequisites": [
+        "HIST 3368"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "HIST 4390",
+      "name": "Senior Seminar in History",
+      "credits": 3,
+      "prerequisites": [
+        "HIST 4301"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

@@ -159,8 +159,9 @@ class CougarDegreePlanner {
             try {
                 console.log('🚀 Attempting to generate degree plan with AI...');
                 console.log('📝 Major:', major);
+                console.log('📝 Start Semester:', startSemester);
                 console.log('📝 Taken classes:', takenClasses);
-                degreePlan = await this.generateDegreePlanWithAI(major, takenClasses);
+                degreePlan = await this.generateDegreePlanWithAI(major, takenClasses, startSemester);
                 console.log('✅ AI degree plan generated successfully!');
                 console.log('📊 AI degree plan:', degreePlan);
             } catch (aiError) {
@@ -332,10 +333,8 @@ class CougarDegreePlanner {
         // Update progress bar
         this.updateProgressBar(degreePlan);
         
-        const semesterNames = this.getSemesterNames(degreePlan.startSemester);
-        
-        // Group semesters by year
-        const years = this.groupSemestersByYear(degreePlan.semesters, semesterNames);
+        // Group semesters by year (semester names are already in each semester object)
+        const years = this.groupSemestersByYear(degreePlan.semesters);
         
         let html = '';
         
@@ -371,12 +370,13 @@ class CougarDegreePlanner {
         this.degreePlan.innerHTML = html;
     }
 
-    groupSemestersByYear(semesters, semesterNames) {
+    groupSemestersByYear(semesters) {
         const years = [];
         let currentYear = [];
         
         semesters.forEach((semester, index) => {
-            const semesterName = semesterNames[index] || `Semester ${semester.number}`;
+            // Use the semester name from the backend (already set in convertAIDegreePlan)
+            const semesterName = semester.name || `Semester ${semester.semester || index + 1}`;
             const isFall = semesterName.toLowerCase().includes('fall');
             
             currentYear.push({
@@ -459,10 +459,10 @@ class CougarDegreePlanner {
         }
     }
 
-    async generateDegreePlanWithAI(major, currentCourses = []) {
+    async generateDegreePlanWithAI(major, currentCourses = [], startSemester = 'Fall 2025') {
         try {
             console.log('🤖 Calling AI backend...', `${this.apiBaseUrl}/degree-plan`);
-            console.log('📝 Request data:', { major, currentCourses });
+            console.log('📝 Request data:', { major, currentCourses, startSemester });
             
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 120000); // 2 minute timeout
@@ -480,7 +480,8 @@ class CougarDegreePlanner {
                         difficulty: 'balanced',
                         schedule: 'full-time'
                     },
-                    currentCourses: currentCourses
+                    currentCourses: currentCourses,
+                    startSemester: startSemester
                 }),
                 signal: controller.signal
             });

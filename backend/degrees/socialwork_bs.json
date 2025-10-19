@@ -1,0 +1,194 @@
+{
+  "university": "University of Houston",
+  "major": "B.S. in Social Work",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
+    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "U.S. History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "U.S. History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "SOCW 2361",
+      "name": "Introduction to Social Work",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "SOCI 1301",
+      "name": "Introduction to Sociology",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "PSYC 1300",
+      "name": "Introduction to Psychology",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "MATH 1342",
+      "name": "Elementary Statistics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "SOCW 3311",
+      "name": "Human Behavior and the Social Environment I",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 2361"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "SOCW 3312",
+      "name": "Human Behavior and the Social Environment II",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 3311"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "SOCW 3350",
+      "name": "Research Methods in Social Work",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 1342"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "SOCW 3360",
+      "name": "Social Welfare Policy",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 2361"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "SOCW 4360",
+      "name": "Generalist Practice I",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 3312"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "SOCW 4361",
+      "name": "Generalist Practice II",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 4360"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "SOCW 4390",
+      "name": "Field Practicum",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 4361"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "SOCW 4323",
+      "name": "Child and Family Welfare",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 3312"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "SOCW 4345",
+      "name": "Mental Health Policy",
+      "credits": 3,
+      "prerequisites": [
+        "SOCW 3312"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

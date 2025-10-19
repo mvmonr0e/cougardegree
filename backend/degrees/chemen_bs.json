@@ -1,0 +1,270 @@
+{
+  "university": "University of Houston",
+  "major": "B.S. in Chemical Engineering",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
+    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "U.S. History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "U.S. History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2413",
+      "name": "Calculus I",
+      "credits": 4,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2414",
+      "name": "Calculus II",
+      "credits": 4,
+      "prerequisites": [
+        "MATH 2413"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2415",
+      "name": "Calculus III",
+      "credits": 4,
+      "prerequisites": [
+        "MATH 2414"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 3321",
+      "name": "Engineering Mathematics",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 2415"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 3000
+    },
+    {
+      "id": "CHEM 1311",
+      "name": "Fundamentals of Chemistry",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "CHEM 1111",
+      "name": "Fundamentals of Chemistry Lab",
+      "credits": 1,
+      "prerequisites": [
+        "CHEM 1311"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "CHEM 1312",
+      "name": "Fundamentals of Chemistry II",
+      "credits": 3,
+      "prerequisites": [
+        "CHEM 1311"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "CHEM 1112",
+      "name": "Fundamentals of Chemistry II Lab",
+      "credits": 1,
+      "prerequisites": [
+        "CHEM 1312"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "PHYS 2325",
+      "name": "University Physics I",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 2413"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2125",
+      "name": "University Physics I Lab",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2325"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "CHEE 1332",
+      "name": "Introduction to Chemical Engineering",
+      "credits": 3,
+      "prerequisites": [
+        "CHEM 1311",
+        "MATH 2413"
+      ],
+      "requirement_type": "Major Core",
+      "level": 1000
+    },
+    {
+      "id": "CHEE 2331",
+      "name": "Chemical Processes",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 1332"
+      ],
+      "requirement_type": "Major Core",
+      "level": 2000
+    },
+    {
+      "id": "CHEE 3363",
+      "name": "Thermodynamics",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "CHEE 3366",
+      "name": "Fluid Mechanics",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "CHEE 3367",
+      "name": "Heat and Mass Transfer",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "CHEE 4361",
+      "name": "Process Control",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 3367"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "CHEE 4367",
+      "name": "Chemical Reaction Engineering",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 3363"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "CHEE 4374",
+      "name": "Process Design",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 4361",
+        "CHEE 4367"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "CHEE 4372",
+      "name": "Petroleum Processing",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 3367"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "CHEE 4380",
+      "name": "Biochemical Engineering",
+      "credits": 3,
+      "prerequisites": [
+        "CHEE 3367"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

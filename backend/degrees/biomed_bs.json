@@ -1,0 +1,296 @@
+{
+  "university": "University of Houston",
+  "major": "B.S. in Biomedical Engineering",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
+    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "U.S. History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "U.S. History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2413",
+      "name": "Calculus I",
+      "credits": 4,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2414",
+      "name": "Calculus II",
+      "credits": 4,
+      "prerequisites": [
+        "MATH 2413"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2415",
+      "name": "Calculus III",
+      "credits": 4,
+      "prerequisites": [
+        "MATH 2414"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2325",
+      "name": "University Physics I",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 2413"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2125",
+      "name": "University Physics I Lab",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2325"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2326",
+      "name": "University Physics II",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2325"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2126",
+      "name": "University Physics II Lab",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "CHEM 1311",
+      "name": "Fundamentals of Chemistry",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "CHEM 1111",
+      "name": "Fundamentals of Chemistry Lab",
+      "credits": 1,
+      "prerequisites": [
+        "CHEM 1311"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "CHEM 1312",
+      "name": "Fundamentals of Chemistry II",
+      "credits": 3,
+      "prerequisites": [
+        "CHEM 1311"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "CHEM 1112",
+      "name": "Fundamentals of Chemistry II Lab",
+      "credits": 1,
+      "prerequisites": [
+        "CHEM 1312"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "BIOL 1361",
+      "name": "Biology for Science Majors I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "BIOL 1161",
+      "name": "Biology for Science Majors I Lab",
+      "credits": 1,
+      "prerequisites": [
+        "BIOL 1361"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 1000
+    },
+    {
+      "id": "BIOE 2401",
+      "name": "Introduction to Biomedical Engineering",
+      "credits": 4,
+      "prerequisites": [
+        "BIOL 1361"
+      ],
+      "requirement_type": "Major Core",
+      "level": 2000
+    },
+    {
+      "id": "BIOE 3147",
+      "name": "Biomedical Electronics Lab",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "BIOE 3302",
+      "name": "Biomechanics",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 2415"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "BIOE 3321",
+      "name": "Biotransport Processes",
+      "credits": 3,
+      "prerequisites": [
+        "BIOE 3302"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "BIOE 3343",
+      "name": "Bioinstrumentation",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "BIOE 4357",
+      "name": "Biomedical Signal Processing",
+      "credits": 3,
+      "prerequisites": [
+        "BIOE 3343"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "BIOE 4410",
+      "name": "Biomaterials",
+      "credits": 4,
+      "prerequisites": [
+        "CHEM 1312"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "BIOE 4360",
+      "name": "Senior Design",
+      "credits": 3,
+      "prerequisites": [
+        "BIOE 4357"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "BIOE 4362",
+      "name": "Tissue Engineering",
+      "credits": 3,
+      "prerequisites": [
+        "BIOE 4410"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "BIOE 4365",
+      "name": "Neural Engineering",
+      "credits": 3,
+      "prerequisites": [
+        "BIOE 4357"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "university": "University of Houston",
+  "major": "B.A. in English",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
+    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "U.S. History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "U.S. History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "ENGL 2331",
+      "name": "Introduction to Literature",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "ENGL 2332",
+      "name": "World Literature",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "ENGL 2360",
+      "name": "Western World Literature",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "ENGL 3300",
+      "name": "Introduction to Literary Theory",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "ENGL 3315",
+      "name": "Shakespeare",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "ENGL 3320",
+      "name": "American Literature to 1865",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "ENGL 3321",
+      "name": "American Literature since 1865",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "ENGL 3340",
+      "name": "British Literature to 1800",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "ENGL 3341",
+      "name": "British Literature since 1800",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 2331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "ENGL 4370",
+      "name": "Topics in Contemporary Literature",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 3300"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "ENGL 4390",
+      "name": "Senior Seminar in English",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 3300"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

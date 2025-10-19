@@ -1,0 +1,174 @@
+{
+  "university": "University of Houston",
+  "major": "B.S. in Sport Administration",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
+    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "U.S. History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "U.S. History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "KIN 3315",
+      "name": "Sport and Society",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 3000
+    },
+    {
+      "id": "KIN 3352",
+      "name": "Sport in Contemporary Society",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 3000
+    },
+    {
+      "id": "MANA 3335",
+      "name": "Organizational Behavior and Management",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 3000
+    },
+    {
+      "id": "MARK 3336",
+      "name": "Principles of Marketing",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 3000
+    },
+    {
+      "id": "KIN 3355",
+      "name": "Event and Facility Management",
+      "credits": 3,
+      "prerequisites": [
+        "KIN 3315"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "KIN 4355",
+      "name": "Sport Marketing",
+      "credits": 3,
+      "prerequisites": [
+        "MARK 3336"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "KIN 4310",
+      "name": "Sport Finance",
+      "credits": 3,
+      "prerequisites": [
+        "MANA 3335"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "KIN 4356",
+      "name": "Sport Law",
+      "credits": 3,
+      "prerequisites": [
+        "KIN 3355"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "KIN 4358",
+      "name": "Governance and Compliance in Sport",
+      "credits": 3,
+      "prerequisites": [
+        "KIN 3315"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "KIN 4380",
+      "name": "Esports Management",
+      "credits": 3,
+      "prerequisites": [
+        "KIN 3355"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "KIN 4390",
+      "name": "Internship in Sport Administration",
+      "credits": 3,
+      "prerequisites": [
+        "KIN 4355"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

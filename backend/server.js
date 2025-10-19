@@ -40,7 +40,7 @@ app.get('/health', (req, res) => {
 // Degree planning endpoints
 app.post('/api/degree-plan', async (req, res) => {
   try {
-    const { major, credits, preferences, currentCourses } = req.body;
+    const { major, credits, preferences, currentCourses, startSemester } = req.body;
     
     // Validate required fields
     if (!major) {
@@ -53,7 +53,8 @@ app.post('/api/degree-plan', async (req, res) => {
       major,
       credits: credits || 120,
       preferences: preferences || {},
-      currentCourses: currentCourses || []
+      currentCourses: currentCourses || [],
+      startSemester: startSemester || 'Fall 2025'
     });
 
     res.json({
