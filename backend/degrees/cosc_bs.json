@@ -1,0 +1,238 @@
+{
+  "university": "University of Houston",
+  "major": "B.S. in Computer Science",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C− rule: maximum of 6 hours of grades below C− allowed in COSC courses",
+    "Pre‑requisite rule: must earn C− or better in all COSC courses in order to take subsequent COSC courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W’s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000‑ or 4000‑level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower‑level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": ["ENGL 1301"],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "American History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "American History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2413",
+      "name": "Calculus I",
+      "credits": 4,
+      "prerequisites": [],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2414",
+      "name": "Calculus II",
+      "credits": 4,
+      "prerequisites": ["MATH 2413"],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2318",
+      "name": "Linear Algebra",
+      "credits": 3,
+      "prerequisites": ["MATH 2413"],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2305",
+      "name": "Discrete Mathematics",
+      "credits": 3,
+      "prerequisites": ["MATH 2413"],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "MATH 3339",
+      "name": "Statistics for the Sciences",
+      "credits": 3,
+      "prerequisites": ["MATH 2414"],
+      "requirement_type": "Major Prerequisites",
+      "level": 3000
+    },
+    {
+      "id": "COSC 1336",
+      "name": "Computer Science and Programming",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Major Core",
+      "level": 1000
+    },
+    {
+      "id": "COSC 1437",
+      "name": "Introduction to Programming",
+      "credits": 4,
+      "prerequisites": ["COSC 1336"],
+      "requirement_type": "Major Core",
+      "level": 1000
+    },
+    {
+      "id": "COSC 2436",
+      "name": "Programming and Data Structures",
+      "credits": 4,
+      "prerequisites": ["COSC 1437"],
+      "requirement_type": "Major Core",
+      "level": 2000
+    },
+    {
+      "id": "COSC 2425",
+      "name": "Computer Organization and Architecture",
+      "credits": 4,
+      "prerequisites": ["COSC 1437"],
+      "requirement_type": "Major Core",
+      "level": 2000
+    },
+    {
+      "id": "COSC 3320",
+      "name": "Algorithms and Data Structures",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "COSC 3340",
+      "name": "Introduction to Automata and Computability",
+      "credits": 3,
+      "prerequisites": ["COSC 3336"],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "COSC 3336",
+      "name": "Computing Structures",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "COSC 3360",
+      "name": "Operating Systems",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "COSC 3380",
+      "name": "Database Systems",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "COSC 4351",
+      "name": "Fundamentals of Software Engineering",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "COSC 4353",
+      "name": "Software Design",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "COSC 4354",
+      "name": "Software Development Practices",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "COSC 4355",
+      "name": "Introduction to Ubiquitous Computing",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "COSC 4364",
+      "name": "Numerical Methods",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "COSC 4368",
+      "name": "Artificial Intelligence Programming",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "COSC 4370",
+      "name": "Interactive Computer Graphics",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    }
+  ]
+}

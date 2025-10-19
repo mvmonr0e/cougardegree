@@ -74,27 +74,7 @@ app.post('/api/degree-plan', async (req, res) => {
 
 // Get available majors
 app.get('/api/majors', (req, res) => {
-  const majors = [
-    'Computer Science',
-    'Software Engineering',
-    'Data Science',
-    'Information Technology',
-    'Cybersecurity',
-    'Computer Information Systems',
-    'Management Information Systems',
-    'Business Administration',
-    'Marketing',
-    'Finance',
-    'Accounting',
-    'Psychology',
-    'Biology',
-    'Chemistry',
-    'Mathematics',
-    'Physics',
-    'Engineering',
-    'Nursing',
-    'Education'
-  ];
+  const majors = degreePlanningService.getAvailableMajors();
   
   res.json({
     success: true,

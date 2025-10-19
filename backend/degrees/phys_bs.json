@@ -1,0 +1,353 @@
+{
+  "university": "University of Houston",
+  "major": "B.S. in Physics",
+  "total_credit_hours": 120,
+  "graduation_rules": [
+    "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
+    "C- rule: maximum of 6 hours of grades below C- allowed in UH PHYS courses",
+    "Pre-requisite rule: must earn C- or better in prerequisite for PHYS courses",
+    "See residency rule in UH catalog",
+    "Maximum of 6 withdrawals (W's) allowed during entire undergraduate career",
+    "Minimum of 36 advanced hours and 120 total hours to graduate",
+    "Maximum of 66 lower level transfer hours may be applied toward the UH degree"
+  ],
+  "requirements_categories": [
+    "Core",
+    "Major Prerequisites",
+    "Major Core",
+    "Major Electives",
+    "NSM Natural Sciences"
+  ],
+  "courses": [
+    {
+      "id": "ENGL 1301",
+      "name": "First Year Writing I",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "ENGL 1302",
+      "name": "First Year Writing II",
+      "credits": 3,
+      "prerequisites": [
+        "ENGL 1301"
+      ],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1301",
+      "name": "American History to 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "HIST 1302",
+      "name": "American History since 1877",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 1000
+    },
+    {
+      "id": "GOVT 2305",
+      "name": "U.S. Government: Congress, President, and Court",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "GOVT 2306",
+      "name": "U.S. and Texas Constitutions and Politics",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Core",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2125",
+      "name": "University Physics Lab I",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2325"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2325",
+      "name": "University Physics I",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 2413"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2126",
+      "name": "University Physics Lab II",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 2326",
+      "name": "University Physics II",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2325"
+      ],
+      "requirement_type": "Major Prerequisites",
+      "level": 2000
+    },
+    {
+      "id": "PHYS 3110",
+      "name": "Advanced Lab Analysis",
+      "credits": 1,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3313",
+      "name": "Advanced Lab I (WID)",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3214",
+      "name": "Advanced Lab II",
+      "credits": 2,
+      "prerequisites": [
+        "PHYS 3313"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3309",
+      "name": "Intermediate Mechanics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326",
+        "MATH 2415"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3315",
+      "name": "Modern Physics I",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3316",
+      "name": "Quantum Mechanics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 3315",
+        "MATH 3331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3327",
+      "name": "Thermal Physics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Core",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 4321",
+      "name": "Intermediate Electromagnetic Theory I",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 3331"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4322",
+      "name": "Intermediate Electromagnetic Theory II",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 4321"
+      ],
+      "requirement_type": "Major Core",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 3305",
+      "name": "Introduction to Astrophysics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 3312",
+      "name": "Modern Optics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 3000
+    },
+    {
+      "id": "PHYS 4337",
+      "name": "Introduction to Solid State Physics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4421",
+      "name": "Electronic Devices & their Applications",
+      "credits": 4,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4350",
+      "name": "Computational Physics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4356",
+      "name": "Introduction to Particle Physics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4360",
+      "name": "Suborbital Methods in Space & Atmospheric Physics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4370",
+      "name": "Nanophysics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "PHYS 4397",
+      "name": "Selected Topics in Physics",
+      "credits": 3,
+      "prerequisites": [
+        "PHYS 2326"
+      ],
+      "requirement_type": "Major Electives",
+      "level": 4000
+    },
+    {
+      "id": "MATH 2413",
+      "name": "Calculus I",
+      "credits": 4,
+      "prerequisites": [],
+      "requirement_type": "NSM Natural Sciences",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2414",
+      "name": "Calculus II",
+      "credits": 4,
+      "prerequisites": [
+        "MATH 2413"
+      ],
+      "requirement_type": "NSM Natural Sciences",
+      "level": 2000
+    },
+    {
+      "id": "MATH 2415",
+      "name": "Calculus III",
+      "credits": 4,
+      "prerequisites": [
+        "MATH 2414"
+      ],
+      "requirement_type": "NSM Natural Sciences",
+      "level": 2000
+    },
+    {
+      "id": "MATH 3331",
+      "name": "Differential Equations",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 2415"
+      ],
+      "requirement_type": "NSM Natural Sciences",
+      "level": 3000
+    },
+    {
+      "id": "MATH 3363",
+      "name": "Introduction to Partial Differential Equations",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 3331"
+      ],
+      "requirement_type": "NSM Natural Sciences",
+      "level": 3000
+    },
+    {
+      "id": "MATH 3364",
+      "name": "Complex Analysis",
+      "credits": 3,
+      "prerequisites": [
+        "MATH 3331"
+      ],
+      "requirement_type": "NSM Natural Sciences",
+      "level": 3000
+    }
+  ]
+}

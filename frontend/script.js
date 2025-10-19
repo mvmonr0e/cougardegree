@@ -164,21 +164,23 @@ class CougarDegreePlanner {
                 console.log('✅ AI degree plan generated successfully!');
                 console.log('📊 AI degree plan:', degreePlan);
             } catch (aiError) {
-                console.error('❌ AI backend failed, falling back to local generation:', aiError);
+                console.error('❌ AI backend failed:', aiError);
                 console.error('❌ AI Error details:', aiError.message);
                 console.error('❌ AI Error stack:', aiError.stack);
                 
-                // Show user-friendly error message
-                if (aiError.message.includes('timeout')) {
-                    this.showError('AI request timed out. The AI model is taking too long to respond. Please try again.');
-                    return;
-                } else if (aiError.message.includes('Failed to fetch')) {
-                    this.showError('Cannot connect to the AI service. Please check if the backend server is running.');
-                    return;
+                // Show user-friendly error message based on error type
+                let errorMessage = 'Failed to generate degree plan. Please try again.';
+                
+                if (aiError.message.includes('timeout') || aiError.message.includes('timed out')) {
+                    errorMessage = 'AI request timed out. The AI model is taking too long to respond (>2 minutes). Please try again.';
+                } else if (aiError.message.includes('Failed to fetch') || aiError.message.includes('Network')) {
+                    errorMessage = 'Cannot connect to the AI service. Please check if the backend server is running.';
+                } else if (aiError.message.includes('Invalid') || aiError.message.includes('parse')) {
+                    errorMessage = 'AI returned invalid data. Please try again.';
                 }
                 
-                // Fallback to local generation
-                degreePlan = this.generateDegreePlan(major, startSemester, takenClasses);
+                this.showError(errorMessage);
+                return;
             }
             
             // Display results
@@ -350,8 +352,10 @@ class CougarDegreePlanner {
                                 </div>
                                 <div class="courses-list">
                                     ${semester.courses.map(course => `
-                                        <div class="course-item">
-                                            <span class="course-code">${course.code}: ${course.name}</span>
+                                        <div class="course-item ${course.completed ? 'completed' : ''}">
+                                            <span class="course-code">
+                                                ${course.completed ? '✓ ' : ''}${course.code}: ${course.name}
+                                            </span>
                                             <span class="course-credits">${course.credits} Cr.</span>
                                         </div>
                                     `).join('')}
@@ -461,7 +465,7 @@ class CougarDegreePlanner {
             console.log('📝 Request data:', { major, currentCourses });
             
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 120000); // 2 minute timeout
 
             const response = await fetch(`${this.apiBaseUrl}/degree-plan`, {
                 method: 'POST',
@@ -529,7 +533,7 @@ class CougarDegreePlanner {
             major: degreePlan.major,
             totalCredits: degreePlan.totalCredits,
             semesters: degreePlan.semesters.map(sem => ({
-                name: `Semester ${sem.semester}`,
+                name: sem.semesterName || `Semester ${sem.semester}`,
                 courses: sem.courses.map(course => ({
                     code: course.code,
                     name: course.name,
@@ -537,7 +541,8 @@ class CougarDegreePlanner {
                     prerequisites: course.prerequisites || [],
                     type: course.type === 'major prerequisites' ? 'required' : 
                           course.type === 'general education' ? 'general' : 
-                          course.type === 'major core' ? 'required' : 'elective'
+                          course.type === 'major core' ? 'required' : 'elective',
+                    completed: takenClasses.includes(course.code)
                 }))
             })),
             required: degreePlan.coreCourses || [],

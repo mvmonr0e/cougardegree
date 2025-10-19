@@ -328,6 +328,19 @@ body {
     border-bottom: none;
 }
 
+.course-item.completed {
+    opacity: 0.6;
+    text-decoration: line-through;
+    background-color: rgba(72, 187, 120, 0.1);
+    padding: 8px;
+    border-radius: 4px;
+    margin: 4px 0;
+}
+
+.course-item.completed .course-code {
+    color: #48bb78;
+}
+
 .course-code {
     color: #e2e8f0;
     font-size: 0.9rem;
