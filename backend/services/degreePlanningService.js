@@ -2,7 +2,7 @@ const axios = require('axios');
 
 // DigitalOcean AI Agents Configuration
 const AI_ENDPOINT_URL = process.env.AI_ENDPOINT_URL || 'https://api.digitalocean.com/v2/ai/agents/your-agent-id/generate';
-const AI_ACCESS_KEY = process.env.AI_ACCESS_KEY || 'pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc';
+const AI_ACCESS_KEY = process.env.AI_ACCESS_KEY;
 
 class DegreePlanningService {
   constructor() {
@@ -21,29 +21,26 @@ class DegreePlanningService {
    */
   async generateDegreePlan({ major, credits, preferences, currentCourses }) {
     try {
-      // For now, return the exact structure you provided
-      if (major === 'Computer Science') {
-        return this.getHardcodedComputerSciencePlan();
-      } else if (major === 'Computer Information Systems') {
-        return this.getHardcodedComputerInformationSystemsPlan();
-      } else if (major === 'Management Information Systems') {
-        return this.getHardcodedManagementInformationSystemsPlan();
-      }
-      
+      console.log(`🎓 Generating degree plan for major: ${major}`);
+      console.log(`📊 Credits: ${credits}, Current courses: ${currentCourses?.length || 0}`);
+
       // Prepare the prompt for the AI model
       const prompt = this.buildPrompt({ major, credits, preferences, currentCourses });
-      
+
       // Call the AI model
+      console.log('🚀 Calling DigitalOcean AI Agent...');
       const aiResponse = await this.callAIModel(prompt);
-      
+
       // Parse and validate the AI response
       const degreePlan = this.parseAIResponse(aiResponse);
-      
+
       // Add metadata and validation
       return this.enrichDegreePlan(degreePlan, { major, credits, preferences });
-      
+
     } catch (error) {
-      console.error('Error in generateDegreePlan:', error);
+      console.error('❌ Error in generateDegreePlan:', error);
+
+      // Don't fallback to hardcoded data - throw error so user knows to try again
       throw new Error(`Failed to generate degree plan: ${error.message}`);
     }
   }
@@ -576,7 +573,7 @@ CRITICAL: Generate ALL 8 semesters exactly as specified above. Use the EXACT cou
             'Authorization': `Bearer ${this.accessKey}`,
             'Content-Type': 'application/json'
           },
-          timeout: 60000
+          timeout: 180000 // 3 minutes
         }
       );
 
@@ -710,10 +707,9 @@ CRITICAL: Generate ALL 8 semesters exactly as specified above. Use the EXACT cou
       }
     } catch (error) {
       console.error('Error parsing AI response:', error);
-      console.log('Falling back to local degree plan...');
-      
-      // Return a fallback degree plan if parsing fails
-      return this.generateFallbackDegreePlan();
+
+      // Don't fallback - throw error so user knows to try again
+      throw new Error(`Failed to parse AI response: ${error.message}`);
     }
   }
 

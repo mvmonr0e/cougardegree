@@ -27,7 +27,7 @@ Create a `.env` file in the backend directory:
 ```env
 # DigitalOcean AI Model Configuration
 AI_ENDPOINT_URL=https://api.digitalocean.com/v2/ai/models/your-model-id
-AI_ACCESS_KEY=pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc
+AI_ACCESS_KEY=your_api_key_here
 
 # Server Configuration
 PORT=3001
@@ -120,8 +120,8 @@ This will test all endpoints and verify the AI integration.
 
 The backend integrates with DigitalOcean AI models using:
 
-- **Access Key**: `pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc`
-- **Endpoint**: Configurable via environment variables
+- **Access Key**: Configured via `AI_ACCESS_KEY` environment variable
+- **Endpoint**: Configurable via `AI_ENDPOINT_URL` environment variable
 - **Fallback**: Local degree planning if AI model is unavailable
 
 ### AI Model Configuration

@@ -5,9 +5,10 @@
  * This script helps you find the correct endpoint URL for your AI agent
  */
 
+require('dotenv').config();
 const axios = require('axios');
 
-const ACCESS_KEY = 'pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc';
+const ACCESS_KEY = process.env.AI_ACCESS_KEY;
 
 async function findAgentEndpoint() {
   console.log('🔍 Finding your DigitalOcean AI Agent endpoint...\n');

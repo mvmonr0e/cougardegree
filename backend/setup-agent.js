@@ -14,8 +14,10 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+require('dotenv').config();
+
 console.log('🤖 CougarDegree AI Agent Setup\n');
-console.log('You have the access key: pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc');
+console.log('Using access key from environment variables');
 console.log('Now we need to find your agent endpoint URL.\n');
 
 function question(prompt) {
@@ -54,7 +56,7 @@ async function setupAgent() {
         },
         {
           headers: {
-            'Authorization': 'Bearer pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc',
+            'Authorization': `Bearer ${process.env.AI_ACCESS_KEY}`,
             'Content-Type': 'application/json'
           },
           timeout: 10000
@@ -73,7 +75,7 @@ async function setupAgent() {
     // Create .env file
     const envContent = `# DigitalOcean AI Agents Configuration
 AI_ENDPOINT_URL=${endpointUrl}
-AI_ACCESS_KEY=pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc
+AI_ACCESS_KEY=${process.env.AI_ACCESS_KEY}
 
 # Server Configuration
 PORT=3001

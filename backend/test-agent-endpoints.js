@@ -5,10 +5,11 @@
  * This script tests various endpoint patterns to find the correct one
  */
 
+require('dotenv').config();
 const axios = require('axios');
 
-const BASE_URL = 'https://dpwzdzydkud22zbtppvlqntp.agents.do-ai.run';
-const ACCESS_KEY = 'pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc';
+const BASE_URL = process.env.AI_ENDPOINT_URL?.split('/api')[0] || 'https://dpwzdzydkud22zbtppvlqntp.agents.do-ai.run';
+const ACCESS_KEY = process.env.AI_ACCESS_KEY;
 
 const ENDPOINT_PATTERNS = [
   '/api/v1/generate',

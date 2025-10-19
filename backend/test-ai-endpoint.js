@@ -5,9 +5,10 @@
  * This script tests various API formats to find the correct one for your AI model
  */
 
+require('dotenv').config();
 const axios = require('axios');
 
-const ACCESS_KEY = 'pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc';
+const ACCESS_KEY = process.env.AI_ACCESS_KEY;
 
 // Common DigitalOcean AI endpoint patterns
 const ENDPOINT_PATTERNS = [

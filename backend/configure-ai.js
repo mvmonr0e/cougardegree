@@ -14,6 +14,8 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+require('dotenv').config();
+
 console.log('🤖 CougarDegree AI Model Configuration\n');
 console.log('This will help you configure the correct DigitalOcean AI model endpoint.\n');
 
@@ -26,7 +28,7 @@ function question(prompt) {
 async function configureAI() {
   try {
     console.log('Current configuration:');
-    console.log('Access Key: pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc');
+    console.log('Access Key: (using environment variable)');
     console.log('Endpoint URL: https://api.digitalocean.com/v2/ai/models/your-model-id (PLACEHOLDER)\n');
     
     console.log('Please provide the following information:');
@@ -51,7 +53,7 @@ async function configureAI() {
         },
         {
           headers: {
-            'Authorization': 'Bearer pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc',
+            'Authorization': `Bearer ${process.env.AI_ACCESS_KEY}`,
             'Content-Type': 'application/json'
           },
           timeout: 10000
@@ -69,7 +71,7 @@ async function configureAI() {
     // Create .env file
     const envContent = `# DigitalOcean AI Model Configuration
 AI_ENDPOINT_URL=${endpointUrl}
-AI_ACCESS_KEY=pAThqdooiHo2Zl2nUPZ9_eePh_lf9DVc
+AI_ACCESS_KEY=${process.env.AI_ACCESS_KEY}
 
 # Server Configuration
 PORT=3001

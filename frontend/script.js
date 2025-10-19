@@ -154,33 +154,16 @@ class CougarDegreePlanner {
             const takenClasses = classesTaken ? 
                 classesTaken.split(',').map(code => code.trim().toUpperCase()) : [];
 
-            // Try to generate degree plan using AI backend first
-            let degreePlan;
-            try {
-                console.log('🚀 Attempting to generate degree plan with AI...');
-                console.log('📝 Major:', major);
-                console.log('📝 Taken classes:', takenClasses);
-                degreePlan = await this.generateDegreePlanWithAI(major, takenClasses);
-                console.log('✅ AI degree plan generated successfully!');
-                console.log('📊 AI degree plan:', degreePlan);
-            } catch (aiError) {
-                console.error('❌ AI backend failed, falling back to local generation:', aiError);
-                console.error('❌ AI Error details:', aiError.message);
-                console.error('❌ AI Error stack:', aiError.stack);
-                
-                // Show user-friendly error message
-                if (aiError.message.includes('timeout')) {
-                    this.showError('AI request timed out. The AI model is taking too long to respond. Please try again.');
-                    return;
-                } else if (aiError.message.includes('Failed to fetch')) {
-                    this.showError('Cannot connect to the AI service. Please check if the backend server is running.');
-                    return;
-                }
-                
-                // Fallback to local generation
-                degreePlan = this.generateDegreePlan(major, startSemester, takenClasses);
-            }
-            
+            // Generate degree plan using AI backend
+            console.log('🚀 Attempting to generate degree plan with AI...');
+            console.log('📝 Major:', major);
+            console.log('📝 Taken classes:', takenClasses);
+
+            const degreePlan = await this.generateDegreePlanWithAI(major, takenClasses);
+
+            console.log('✅ AI degree plan generated successfully!');
+            console.log('📊 AI degree plan:', degreePlan);
+
             // Display results
             this.displayDegreePlan(degreePlan);
             
@@ -208,7 +191,7 @@ class CougarDegreePlanner {
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
-                <p class="loading-subtext">This may take 30-60 seconds</p>
+                <p class="loading-subtext">This may take up to 3 minutes</p>
             </div>
         `;
     }
@@ -372,7 +355,7 @@ class CougarDegreePlanner {
         let currentYear = [];
         
         semesters.forEach((semester, index) => {
-            const semesterName = semesterNames[index] || `Semester ${semester.number}`;
+            const semesterName = semesterNames[index] || semester.name || `Semester ${index + 1}`;
             const isFall = semesterName.toLowerCase().includes('fall');
             
             currentYear.push({
@@ -461,7 +444,7 @@ class CougarDegreePlanner {
             console.log('📝 Request data:', { major, currentCourses });
             
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minute timeout
 
             const response = await fetch(`${this.apiBaseUrl}/degree-plan`, {
                 method: 'POST',

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Frontend-Backend Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>CougarDegree Frontend-Backend Connection Test</h1>
+
+    <button onclick="runTests()">Run Tests</button>
+
+    <div id="results"></div>
+
+    <script>
+        async function runTests() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Running tests...</h2>';
+
+            const apiBaseUrl = 'http://localhost:3001/api';
+            const tests = [];
+
+            // Test 1: Health Check
+            try {
+                const response = await fetch('http://localhost:3001/health');
+                const data = await response.json();
+                tests.push({
+                    name: 'Backend Health Check',
+                    success: response.ok,
+                    message: `Status: ${response.status}`,
+                    data: data
+                });
+            } catch (error) {
+                tests.push({
+                    name: 'Backend Health Check',
+                    success: false,
+                    message: error.message
+                });
+            }
+
+            // Test 2: Get Majors
+            try {
+                const response = await fetch(`${apiBaseUrl}/majors`);
+                const data = await response.json();
+                tests.push({
+                    name: 'Get Majors Endpoint',
+                    success: response.ok && data.success,
+                    message: `Found ${data.data?.length || 0} majors`,
+                    data: data
+                });
+            } catch (error) {
+                tests.push({
+                    name: 'Get Majors Endpoint',
+                    success: false,
+                    message: error.message
+                });
+            }
+
+            // Test 3: Generate Degree Plan
+            try {
+                console.log('Testing degree plan generation...');
+                const requestBody = {
+                    major: 'Computer Science',
+                    credits: 120,
+                    preferences: {
+                        focus: 'general',
+                        difficulty: 'balanced',
+                        schedule: 'full-time'
+                    },
+                    currentCourses: []
+                };
+
+                console.log('Request body:', requestBody);
+
+                const response = await fetch(`${apiBaseUrl}/degree-plan`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+
+                const data = await response.json();
+                console.log('Response data:', data);
+
+                tests.push({
+                    name: 'Generate Degree Plan',
+                    success: response.ok && data.success,
+                    message: `Major: ${data.data?.degreePlan?.major || 'N/A'}, Semesters: ${data.data?.degreePlan?.semesters?.length || 0}`,
+                    data: data
+                });
+            } catch (error) {
+                console.error('Degree plan test error:', error);
+                tests.push({
+                    name: 'Generate Degree Plan',
+                    success: false,
+                    message: error.message
+                });
+            }
+
+            // Display results
+            let html = '<h2>Test Results:</h2>';
+            tests.forEach(test => {
+                const className = test.success ? 'success' : 'error';
+                const icon = test.success ? '✅' : '❌';
+                html += `
+                    <div class="test-result ${className}">
+                        <h3>${icon} ${test.name}</h3>
+                        <p>${test.message}</p>
+                        ${test.data ? `<details><summary>Show data</summary><pre>${JSON.stringify(test.data, null, 2)}</pre></details>` : ''}
+                    </div>
+                `;
+            });
+
+            resultsDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
