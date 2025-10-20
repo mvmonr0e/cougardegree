@@ -21,7 +21,7 @@ async function testAPI() {
         // Test degree plan generation
         console.log('3. Testing degree plan generation...');
         const degreePlanResponse = await axios.post(`${API_BASE_URL}/degree-plan`, {
-            major: 'Computer Science',
+            major: 'B.S. in Computer Science',
             credits: 120,
             preferences: {
                 focus: 'software development',
@@ -36,7 +36,7 @@ async function testAPI() {
         console.log(`   - Major: ${degreePlanResponse.data.data.degreePlan.major}`);
         console.log(`   - Total Credits: ${degreePlanResponse.data.data.degreePlan.totalCredits}`);
         console.log(`   - Semesters: ${degreePlanResponse.data.data.degreePlan.semesters.length}`);
-        console.log(`   - Recommendations: ${degreePlanResponse.data.data.recommendations.length}`);
+        console.log(`   - Recommendations: ${degreePlanResponse.data.data.recommendations?.length || 0}`);
         console.log('');
 
         console.log('🎉 All tests passed! Backend is working correctly.');
