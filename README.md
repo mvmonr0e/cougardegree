@@ -1,4 +1,7 @@
 # Digital Ocean Gradient AI Agent Version
+
+Winner of MLH Challenge “Best Use of DigitalOcean Gradient AI” at codeRED Astra Hackathon
+
 ## What Makes This Branch Special?
 
 This branches introduces an AI-powered degree planning system that balances course difficulty across semesters using real grade distribution data.
