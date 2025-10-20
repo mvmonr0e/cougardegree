@@ -1,12 +1,47 @@
-# Dependencies
+# Node and npm
 node_modules/
-**/node_modules/
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+package-lock.json
+
+# Build outputs
+dist/
+build/
+*.log
+
+# VSCode settings
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
 
 # Environment variables
-/backend/.env
 .env
+.env*
 
-# Logs
-/backend/logs
-logs/
-*.log
+# Frontend specific
+/frontend/node_modules/
+/frontend/dist/
+/frontend/build/
+/frontend/.env
+/frontend/.env*
+
+# Backend specific
+/backend/node_modules/
+/backend/dist/
+/backend/build/
+/backend/.env
+/backend/.env*
+/backend/logs/
+
+# Ignore IDE folders
+.vscode/
+.idea/
+*.iml
+
+# Misc
+*.swp
+*.swo
+
