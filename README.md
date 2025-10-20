@@ -1,6 +1,6 @@
 # Digital Ocean Gradient AI Agent Version
 
-Winner of MLH Challenge “Best Use of DigitalOcean Gradient AI” at codeRED Astra Hackathon
+🏆 Winner of MLH Challenge “Best Use of DigitalOcean Gradient AI” at codeRED Astra Hackathon 🏆
 
 ## What Makes This Branch Special?
 
