@@ -49,6 +49,21 @@
       "credits_needed": 3,
       "courses_needed": 1,
       "description": "Social & Behavioral Sciences Core"
+    },
+    {
+      "category": "BIOL_ADDITIONAL",
+      "pool_file": "biol_advanced.json",
+      "credits_needed": 8,
+      "courses_needed": 3,
+      "min_level": 2000,
+      "description": "Additional biology electives (2000+ level)"
+    },
+    {
+      "category": "FREE_ELECTIVES",
+      "pool_file": "core_language_philosophy_culture.json",
+      "credits_needed": 18,
+      "courses_needed": 6,
+      "description": "Free electives to reach 120 credits"
     }
   ],
   "courses": [

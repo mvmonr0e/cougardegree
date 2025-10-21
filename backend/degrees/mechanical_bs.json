@@ -46,6 +46,13 @@
       "credits_needed": 3,
       "courses_needed": 1,
       "description": "Social & Behavioral Sciences elective"
+    },
+    {
+      "category": "FREE_ELECTIVES",
+      "pool_file": "core_language_philosophy_culture.json",
+      "credits_needed": 2,
+      "courses_needed": 1,
+      "description": "Free elective to reach 128 credits"
     }
   ],
   "courses": [
