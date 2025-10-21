@@ -7,11 +7,15 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemi
 class DegreePlanningService {
   constructor() {
     this.degreesPath = path.join(__dirname, '..', 'degrees');
+    this.electivesPath = path.join(__dirname, '..', 'electives');
     // Load all available degree files dynamically
     this.majorMapping = this.loadAllDegreeFiles();
     // Load UH core courses
     this.uhCoreCourses = this.loadUHCoreCourses();
+    // Load elective pools
+    this.electivePools = this.loadElectivePools();
     console.log(`📚 Loaded ${Object.keys(this.majorMapping).length} degree programs`);
+    console.log(`🎯 Loaded ${Object.keys(this.electivePools).length} elective pools`);
   }
 
   /**
@@ -94,6 +98,37 @@ class DegreePlanningService {
   }
 
   /**
+   * Load elective pools from the electives directory
+   */
+  loadElectivePools() {
+    const pools = {};
+    try {
+      if (!fs.existsSync(this.electivesPath)) {
+        console.log('⚠️ Electives directory not found');
+        return pools;
+      }
+
+      const files = fs.readdirSync(this.electivesPath);
+      const electiveFiles = files.filter(f => f.endsWith('.json'));
+      
+      electiveFiles.forEach(filename => {
+        try {
+          const filePath = path.join(this.electivesPath, filename);
+          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+          pools[filename] = data;
+        } catch (error) {
+          console.error(`Error loading elective pool ${filename}:`, error.message);
+        }
+      });
+      
+      return pools;
+    } catch (error) {
+      console.error('Error loading elective pools:', error);
+      return pools;
+    }
+  }
+
+  /**
    * Get fallback science courses if JSON fails
    */
   getFallbackScienceCourses() {
@@ -136,9 +171,18 @@ class DegreePlanningService {
       );
 
       // Get all courses that need to be taken
-      const allCourses = degreeData.courses.filter(course => 
+      let allCourses = degreeData.courses.filter(course => 
         !takenCourseIds.has(course.id)
       );
+
+      // Add electives from pools if elective_requirements exists
+      if (degreeData.elective_requirements) {
+        const selectedElectives = this.selectElectivesFromPools(
+          degreeData.elective_requirements,
+          takenCourseIds
+        );
+        allCourses = [...allCourses, ...selectedElectives];
+      }
 
       console.log(`📊 Total courses in degree: ${degreeData.courses.length}`);
       console.log(`✅ Courses already taken: ${takenCourseIds.size}`);
@@ -180,6 +224,80 @@ class DegreePlanningService {
       console.error('Error in generateDegreePlan:', error);
       throw new Error(`Failed to generate degree plan: ${error.message}`);
     }
+  }
+
+  /**
+   * Select electives from elective pools based on requirements
+   */
+  selectElectivesFromPools(electiveRequirements, takenCourseIds) {
+    const selectedElectives = [];
+    
+    for (const requirement of electiveRequirements) {
+      const { category, pool_file, credits_needed, courses_needed, min_level, advanced_credits_needed, description } = requirement;
+      
+      // Load the elective pool
+      const pool = this.electivePools[pool_file];
+      if (!pool || !pool.courses) {
+        console.warn(`⚠️ Elective pool ${pool_file} not found`);
+        continue;
+      }
+
+      console.log(`🎯 Selecting ${courses_needed || 'multiple'} courses from ${category} (${credits_needed} credits)`);
+      
+      // Filter available courses (not already taken)
+      let availableElectives = pool.courses.filter(course => 
+        !takenCourseIds.has(course.id)
+      );
+
+      // Filter by minimum level if specified
+      if (min_level) {
+        availableElectives = availableElectives.filter(course => course.level >= min_level);
+      }
+
+      // Prioritize advanced courses if needed
+      if (advanced_credits_needed) {
+        availableElectives.sort((a, b) => {
+          const aAdvanced = (a.advanced || a.level >= 4000) ? 1 : 0;
+          const bAdvanced = (b.advanced || b.level >= 4000) ? 1 : 0;
+          return bAdvanced - aAdvanced; // Advanced courses first
+        });
+      }
+
+      // Select courses to meet requirements
+      let creditsSelected = 0;
+      let coursesSelected = 0;
+      let advancedCreditsSelected = 0;
+      
+      for (const course of availableElectives) {
+        if (creditsSelected >= credits_needed) break;
+        if (courses_needed && coursesSelected >= courses_needed) break;
+        
+        // Convert elective format to course format
+        const electiveCourse = {
+          id: course.id,
+          name: course.name,
+          credits: course.credits,
+          prerequisites: course.prerequisites || [],
+          requirement_type: description || category,
+          level: course.level
+        };
+        
+        selectedElectives.push(electiveCourse);
+        creditsSelected += course.credits;
+        coursesSelected++;
+        
+        if (course.advanced || course.level >= 4000) {
+          advancedCreditsSelected += course.credits;
+        }
+      }
+
+      console.log(`✅ Selected ${coursesSelected} courses (${creditsSelected} credits) from ${category}`);
+      if (advanced_credits_needed) {
+        console.log(`   └─ ${advancedCreditsSelected} advanced credits (need ${advanced_credits_needed})`);
+      }
+    }
+    
+    return selectedElectives;
   }
 
   /**

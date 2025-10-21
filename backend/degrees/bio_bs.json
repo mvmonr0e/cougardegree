@@ -19,6 +19,38 @@
     "Biology Advanced",
     "Biology Electives"
   ],
+  "elective_requirements": [
+    {
+      "category": "BIOL_ADVANCED",
+      "pool_file": "biol_advanced.json",
+      "credits_needed": 12,
+      "courses_needed": 4,
+      "min_level": 3000,
+      "advanced_credits_needed": 9,
+      "description": "12 biology elective hours (9 must be advanced/4000-level)"
+    },
+    {
+      "category": "CORE_LANG_PHIL_CULTURE",
+      "pool_file": "core_language_philosophy_culture.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Language, Philosophy & Culture Core"
+    },
+    {
+      "category": "CORE_CREATIVE_ARTS",
+      "pool_file": "core_creative_arts.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Creative Arts Core"
+    },
+    {
+      "category": "CORE_SOCIAL_BEHAVIORAL",
+      "pool_file": "core_social_behavioral.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Social & Behavioral Sciences Core"
+    }
+  ],
   "courses": [
     {
       "id": "ENGL 1301",
@@ -259,118 +291,6 @@
       "prerequisites": ["BIOL 3301"],
       "requirement_type": "Biology Advanced",
       "level": 4000
-    },
-    {
-      "id": "BIOL ELECTIVE 1",
-      "name": "Biology Advanced Elective",
-      "credits": 3,
-      "prerequisites": ["BIOL 1307"],
-      "requirement_type": "Biology Electives",
-      "level": 4000
-    },
-    {
-      "id": "BIOL ELECTIVE 2",
-      "name": "Biology Advanced Elective",
-      "credits": 3,
-      "prerequisites": ["BIOL 1307"],
-      "requirement_type": "Biology Electives",
-      "level": 4000
-    },
-    {
-      "id": "BIOL ELECTIVE 3",
-      "name": "Biology Advanced Elective",
-      "credits": 3,
-      "prerequisites": ["BIOL 1307"],
-      "requirement_type": "Biology Electives",
-      "level": 4000
-    },
-    {
-      "id": "BIOL ELECTIVE 4",
-      "name": "Biology Elective",
-      "credits": 3,
-      "prerequisites": ["BIOL 1307"],
-      "requirement_type": "Biology Electives",
-      "level": 3000
-    },
-    {
-      "id": "CORE ELECTIVE 1",
-      "name": "Language, Philosophy & Culture",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 2",
-      "name": "Creative Arts",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 3",
-      "name": "Social & Behavioral Sciences",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 4",
-      "name": "Component Area Option",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 1",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 2",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 3",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 4",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 5",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 6",
-      "name": "Free Elective",
-      "credits": 2,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
     }
   ]
 }

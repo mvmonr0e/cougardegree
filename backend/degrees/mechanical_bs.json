@@ -17,6 +17,37 @@
     "Mechanical Engineering Major",
     "Technical Electives"
   ],
+  "elective_requirements": [
+    {
+      "category": "MECE_TECHNICAL",
+      "pool_file": "mece_technical.json",
+      "credits_needed": 12,
+      "courses_needed": 4,
+      "min_level": 5000,
+      "description": "12 hours of technical electives (5000-level MECE courses)"
+    },
+    {
+      "category": "CORE_LANG_PHIL_CULTURE",
+      "pool_file": "core_language_philosophy_culture.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Language, Philosophy & Culture elective"
+    },
+    {
+      "category": "CORE_CREATIVE_ARTS",
+      "pool_file": "core_creative_arts.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Creative Arts elective"
+    },
+    {
+      "category": "CORE_SOCIAL_BEHAVIORAL",
+      "pool_file": "core_social_behavioral.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Social & Behavioral Sciences elective"
+    }
+  ],
   "courses": [
     {
       "id": "ENGL 1301",
@@ -321,62 +352,6 @@
       "prerequisites": ["MECE 4371"],
       "requirement_type": "Mechanical Engineering Major",
       "level": 4000
-    },
-    {
-      "id": "MECE ELECTIVE 1",
-      "name": "MECE Technical Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "Technical Electives",
-      "level": 4000
-    },
-    {
-      "id": "MECE ELECTIVE 2",
-      "name": "MECE Technical Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "Technical Electives",
-      "level": 4000
-    },
-    {
-      "id": "MECE ELECTIVE 3",
-      "name": "MECE Technical Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "Technical Electives",
-      "level": 4000
-    },
-    {
-      "id": "MECE ELECTIVE 4",
-      "name": "MECE Technical Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "Technical Electives",
-      "level": 4000
-    },
-    {
-      "id": "CORE ELECTIVE 1",
-      "name": "Language, Philosophy & Culture",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 2",
-      "name": "Creative Arts",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 3",
-      "name": "Social & Behavioral Sciences",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
     }
   ]
 }

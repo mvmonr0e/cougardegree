@@ -21,6 +21,44 @@
     "Science Electives",
     "General Electives"
   ],
+  "elective_requirements": [
+    {
+      "category": "COSC_ADVANCED",
+      "pool_file": "cosc_advanced.json",
+      "credits_needed": 12,
+      "courses_needed": 4,
+      "min_level": 4000,
+      "description": "Choose 4 advanced COSC courses (12 credit hours)"
+    },
+    {
+      "category": "CORE_LANG_PHIL_CULTURE",
+      "pool_file": "core_language_philosophy_culture.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Language, Philosophy & Culture Core"
+    },
+    {
+      "category": "CORE_CREATIVE_ARTS",
+      "pool_file": "core_creative_arts.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Creative Arts Core"
+    },
+    {
+      "category": "CORE_SOCIAL_BEHAVIORAL",
+      "pool_file": "core_social_behavioral.json",
+      "credits_needed": 3,
+      "courses_needed": 1,
+      "description": "Social & Behavioral Sciences Core"
+    },
+    {
+      "category": "NSM_SCIENCE",
+      "pool_file": "nsm_science.json",
+      "credits_needed": 6,
+      "courses_needed": 2,
+      "description": "NSM Science Electives (must be same discipline)"
+    }
+  ],
   "courses": [
     {
       "id": "ENGL 1301",
@@ -213,118 +251,6 @@
       "prerequisites": ["PHYS 1302"],
       "requirement_type": "Science Electives",
       "level": 1000
-    },
-    {
-      "id": "COSC ELECTIVE 1",
-      "name": "Advanced COSC Elective",
-      "credits": 3,
-      "prerequisites": ["COSC 2436"],
-      "requirement_type": "Major Electives",
-      "level": 4000
-    },
-    {
-      "id": "COSC ELECTIVE 2",
-      "name": "Advanced COSC Elective",
-      "credits": 3,
-      "prerequisites": ["COSC 2436"],
-      "requirement_type": "Major Electives",
-      "level": 4000
-    },
-    {
-      "id": "COSC ELECTIVE 3",
-      "name": "Advanced COSC Elective",
-      "credits": 3,
-      "prerequisites": ["COSC 2436"],
-      "requirement_type": "Major Electives",
-      "level": 4000
-    },
-    {
-      "id": "COSC ELECTIVE 4",
-      "name": "Advanced COSC Elective",
-      "credits": 3,
-      "prerequisites": ["COSC 2436"],
-      "requirement_type": "Major Electives",
-      "level": 4000
-    },
-    {
-      "id": "CORE ELECTIVE 1",
-      "name": "Language, Philosophy & Culture",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 2",
-      "name": "Creative Arts",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 3",
-      "name": "Social & Behavioral Sciences",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 2000
-    },
-    {
-      "id": "CORE ELECTIVE 4",
-      "name": "Component Area Option",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "University Core",
-      "level": 3000
-    },
-    {
-      "id": "SCIENCE ELECTIVE 1",
-      "name": "Science Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "Science Electives",
-      "level": 2000
-    },
-    {
-      "id": "SCIENCE ELECTIVE 2",
-      "name": "Science Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "Science Electives",
-      "level": 2000
-    },
-    {
-      "id": "FREE ELECTIVE 1",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 2",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 3",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
-    },
-    {
-      "id": "FREE ELECTIVE 4",
-      "name": "Free Elective",
-      "credits": 3,
-      "prerequisites": [],
-      "requirement_type": "General Electives",
-      "level": 3000
     }
   ]
 }
