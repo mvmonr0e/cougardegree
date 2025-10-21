@@ -57,6 +57,21 @@
       "credits_needed": 6,
       "courses_needed": 2,
       "description": "NSM Science Electives (must be same discipline)"
+    },
+    {
+      "category": "COSC_ADDITIONAL",
+      "pool_file": "cosc_advanced.json",
+      "credits_needed": 12,
+      "courses_needed": 4,
+      "min_level": 3000,
+      "description": "Additional COSC electives (3000+ level)"
+    },
+    {
+      "category": "FREE_ELECTIVES",
+      "pool_file": "core_language_philosophy_culture.json",
+      "credits_needed": 14,
+      "courses_needed": 5,
+      "description": "Free electives - any courses to reach 120 credits"
     }
   ],
   "courses": [

@@ -316,7 +316,8 @@ class DegreePlanningService {
     const MIN_CREDITS = 12;
     const MAX_CREDITS = 18;
     
-    for (let semesterIndex = 0; semesterIndex < 8; semesterIndex++) {
+    // Generate up to 10 semesters (5 years) to accommodate all courses
+    for (let semesterIndex = 0; semesterIndex < 10 && scheduledCourses.size < allCourses.length; semesterIndex++) {
       const semesterCourses = [];
       let semesterCredits = 0;
       
