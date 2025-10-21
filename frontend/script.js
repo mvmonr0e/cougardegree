@@ -351,11 +351,17 @@ class CougarDegreePlanner {
                                 </div>
                                 <div class="courses-list">
                                     ${semester.courses.map(course => `
-                                        <div class="course-item ${course.completed ? 'completed' : ''}">
-                                            <span class="course-code">
-                                                ${course.completed ? '✓ ' : ''}${course.code}: ${course.name}
-                                            </span>
-                                            <span class="course-credits">${course.credits} Cr.</span>
+                                        <div class="course-item ${course.completed ? 'completed' : ''}" title="${course.prerequisites.length > 0 ? 'Prerequisites: ' + course.prerequisites.join(', ') : 'No prerequisites'}">
+                                            <div class="course-info">
+                                                <span class="course-code">
+                                                    ${course.completed ? '✓ ' : ''}${course.code}
+                                                </span>
+                                                <span class="course-name">${course.name}</span>
+                                                ${course.prerequisites.length > 0 ? 
+                                                    `<span class="course-prereq-badge" title="Prerequisites: ${course.prerequisites.join(', ')}">⚠️</span>` 
+                                                    : ''}
+                                            </div>
+                                            <span class="course-credits">${course.credits} cr</span>
                                         </div>
                                     `).join('')}
                                 </div>
@@ -406,9 +412,18 @@ class CougarDegreePlanner {
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
         
-        progressPercentage.textContent = `${degreePlan.progressPercentage}%`;
-        progressFill.style.width = `${degreePlan.progressPercentage}%`;
-        progressText.textContent = `${degreePlan.completedCredits} of ${degreePlan.totalCredits} credits completed`;
+        const percentage = degreePlan.progressPercentage || 0;
+        const completed = degreePlan.completedCredits || 0;
+        const total = degreePlan.totalCredits || 120;
+        
+        progressPercentage.textContent = `${percentage}%`;
+        progressFill.style.width = `${percentage}%`;
+        progressText.textContent = `${completed} of ${total} credits completed`;
+        
+        // Add remaining credits info if available
+        if (degreePlan.creditsRemaining) {
+            progressText.textContent += ` (${degreePlan.creditsRemaining} remaining)`;
+        }
     }
 
     getSemesterNames(startSemester) {
@@ -515,24 +530,24 @@ class CougarDegreePlanner {
     }
 
     convertAIDegreePlan(aiData) {
-        console.log('🔄 Converting AI data...', aiData);
+        console.log('🔄 Converting backend data...', aiData);
         
-        // Convert AI response format to our local format
+        // Convert backend response format to frontend display format
         const degreePlan = aiData.degreePlan || aiData;
         console.log('📋 Degree plan data:', degreePlan);
         
-        // Calculate progress based on taken classes
+        // Get taken classes for marking completed courses
         const takenClasses = this.getTakenClasses();
-        const allCourses = degreePlan.semesters.flatMap(sem => sem.courses);
-        const takenCourses = allCourses.filter(course => 
-            takenClasses.includes(course.code)
-        );
-        const completedCredits = takenCourses.reduce((sum, course) => sum + course.credits, 0);
-        const progressPercentage = Math.round((completedCredits / degreePlan.totalCredits) * 100);
+        
+        // Calculate progress
+        const metadata = aiData.metadata || {};
+        const completedCredits = metadata.creditsCompleted || 0;
+        const totalCredits = degreePlan.totalCredits || 120;
+        const progressPercentage = Math.round((completedCredits / totalCredits) * 100);
         
         const converted = {
             major: degreePlan.major,
-            totalCredits: degreePlan.totalCredits,
+            totalCredits: totalCredits,
             semesters: degreePlan.semesters.map(sem => ({
                 name: sem.semesterName || `Semester ${sem.semester}`,
                 courses: sem.courses.map(course => ({
@@ -540,24 +555,32 @@ class CougarDegreePlanner {
                     name: course.name,
                     credits: course.credits,
                     prerequisites: course.prerequisites || [],
-                    type: course.type === 'major prerequisites' ? 'required' : 
-                          course.type === 'general education' ? 'general' : 
-                          course.type === 'major core' ? 'required' : 'elective',
+                    type: this.normalizeRequirementType(course.type),
                     completed: takenClasses.includes(course.code)
                 }))
             })),
-            required: degreePlan.coreCourses || [],
-            electives: degreePlan.electiveCourses || [],
-            general: degreePlan.generalEducation || [],
             completedCredits: completedCredits,
             progressPercentage: progressPercentage,
-            recommendations: aiData.recommendations || [],
-            timeline: aiData.timeline || '4 years (8 semesters)',
-            metadata: aiData.metadata || {}
+            creditsScheduled: metadata.creditsScheduled || 0,
+            creditsRemaining: metadata.creditsRemaining || (totalCredits - completedCredits),
+            metadata: metadata
         };
         
         console.log('✅ Converted data:', converted);
         return converted;
+    }
+
+    normalizeRequirementType(type) {
+        if (!type) return 'elective';
+        
+        const typeLower = type.toLowerCase();
+        if (typeLower.includes('core') || typeLower.includes('prerequisite')) {
+            return 'required';
+        }
+        if (typeLower.includes('general')) {
+            return 'general';
+        }
+        return 'elective';
     }
 
     getTakenClasses() {

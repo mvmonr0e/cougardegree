@@ -320,8 +320,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 10px;
     border-bottom: 1px solid #4a5568;
+    transition: background-color 0.2s;
+}
+
+.course-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .course-item:last-child {
@@ -341,16 +346,37 @@ body {
     color: #48bb78;
 }
 
+.course-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
 .course-code {
     color: #e2e8f0;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.course-name {
+    color: #cbd5e0;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.course-prereq-badge {
+    font-size: 0.7rem;
+    margin-left: 6px;
+    cursor: help;
 }
 
 .course-credits {
     color: #a0aec0;
     font-size: 0.85rem;
     font-weight: 500;
+    white-space: nowrap;
+    margin-left: 10px;
 }
 
 .semester-total {

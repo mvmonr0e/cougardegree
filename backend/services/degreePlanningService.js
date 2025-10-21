@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config();
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`;
 
 class DegreePlanningService {
   constructor() {
@@ -118,11 +118,13 @@ class DegreePlanningService {
   }
 
   /**
-   * Generate a degree plan using Gemini AI
+   * Generate a degree plan using the JSON course data
    */
   async generateDegreePlan({ major, credits, preferences, currentCourses, startSemester }) {
     try {
-      console.log(`🎓 Generating degree plan for ${major} using Gemini AI...`);
+      console.log(`🎓 Generating degree plan for ${major}...`);
+      console.log(`📝 Current courses taken:`, currentCourses);
+      console.log(`📅 Start semester:`, startSemester);
       
       // Load the degree data for this major
       const degreeData = this.loadDegreeData(major);
@@ -130,8 +132,51 @@ class DegreePlanningService {
         throw new Error(`No degree data found for ${major}`);
       }
 
-      // For now, return a working template while we debug Gemini
-      return this.generateTemplatePlan(degreeData, currentCourses, startSemester);
+      // Normalize current courses to uppercase
+      const takenCourseIds = new Set(
+        (currentCourses || []).map(courseId => courseId.trim().toUpperCase())
+      );
+
+      // Get all courses that need to be taken
+      const allCourses = degreeData.courses.filter(course => 
+        !takenCourseIds.has(course.id)
+      );
+
+      console.log(`📊 Total courses in degree: ${degreeData.courses.length}`);
+      console.log(`✅ Courses already taken: ${takenCourseIds.size}`);
+      console.log(`📝 Courses remaining: ${allCourses.length}`);
+
+      // Generate 8 semesters with proper prerequisite handling
+      const semesters = this.generateOptimalSchedule(
+        allCourses,
+        takenCourseIds,
+        startSemester
+      );
+
+      // Calculate completion statistics
+      const totalCreditsScheduled = semesters.reduce((sum, sem) => 
+        sum + sem.courses.reduce((s, c) => s + c.credits, 0), 0
+      );
+      const creditsAlreadyTaken = degreeData.courses
+        .filter(c => takenCourseIds.has(c.id))
+        .reduce((sum, c) => sum + c.credits, 0);
+
+      return {
+        degreePlan: {
+          major: degreeData.major,
+          totalCredits: degreeData.total_credit_hours,
+          semesters: semesters
+        },
+        metadata: {
+          generatedAt: new Date().toISOString(),
+          aiProvider: 'CougarDegree Scheduler',
+          major: degreeData.major,
+          totalSemesters: semesters.length,
+          creditsScheduled: totalCreditsScheduled,
+          creditsCompleted: creditsAlreadyTaken,
+          creditsRemaining: degreeData.total_credit_hours - creditsAlreadyTaken
+        }
+      };
       
     } catch (error) {
       console.error('Error in generateDegreePlan:', error);
@@ -140,226 +185,183 @@ class DegreePlanningService {
   }
 
   /**
-   * Generate a template-based degree plan (working solution)
+   * Generate optimal schedule with proper prerequisite handling
    */
-  generateTemplatePlan(degreeData, currentCourses, startSemester) {
-    console.log('📋 Generating template-based degree plan...');
+  generateOptimalSchedule(allCourses, takenCourseIds, startSemester) {
+    const semesters = [];
+    const scheduledCourses = new Set();
+    const completedCourses = new Set(takenCourseIds);
     
-    // Get all courses organized by type
-    const coreCourses = degreeData.courses.filter(c => c.requirement_type === 'Core');
-    const majorCourses = degreeData.courses.filter(c => 
-      c.requirement_type === 'Major Core' || c.requirement_type === 'Major Prerequisites'
-    );
-    const electiveCourses = degreeData.courses.filter(c => 
-      c.requirement_type === 'Major Electives' || c.requirement_type?.includes('Elective')
-    );
-    
-    // Add science courses from UH core
-    const scienceCourses = this.uhCoreCourses?.science || [];
-    console.log(`🧪 Including ${scienceCourses.length} science courses`);
-    
-    // Track used courses
-    const usedCourseIds = new Set();
-    
-    // Generate semester names based on start semester
+    // Generate semester names
     const semesterNames = this.generateSemesterNames(startSemester || 'Fall 2025');
     
-    // Create 8 semesters
-    const semesters = [];
+    // Target 15 credits per semester, 12 minimum
+    const TARGET_CREDITS = 15;
+    const MIN_CREDITS = 12;
+    const MAX_CREDITS = 18;
     
-    for (let i = 0; i < 8; i++) {
-      const semesterNumber = i + 1;
-      const semesterName = semesterNames[i];
+    for (let semesterIndex = 0; semesterIndex < 8; semesterIndex++) {
+      const semesterCourses = [];
+      let semesterCredits = 0;
       
-      // Select courses for this semester
-      const semesterCourses = this.selectCoursesForSemester(
-        semesterNumber, 
-        coreCourses, 
-        majorCourses,
-        electiveCourses,
-        scienceCourses,
-        degreeData.courses,
-        usedCourseIds
+      // Get courses that are available this semester
+      const availableCourses = allCourses.filter(course => {
+        // Already scheduled?
+        if (scheduledCourses.has(course.id)) return false;
+        
+        // Prerequisites met?
+        if (!this.arePrerequisitesMet(course, completedCourses)) return false;
+        
+        return true;
+      });
+      
+      // Sort courses by priority
+      const sortedCourses = this.sortCoursesByPriority(
+        availableCourses,
+        semesterIndex,
+        completedCourses
       );
       
-      // Mark courses as used
-      semesterCourses.forEach(course => usedCourseIds.add(course.id));
+      // Add courses to semester
+      for (const course of sortedCourses) {
+        // Check if we can add this course
+        if (semesterCredits + course.credits <= MAX_CREDITS) {
+          semesterCourses.push(course);
+          semesterCredits += course.credits;
+          scheduledCourses.add(course.id);
+          completedCourses.add(course.id);
+          
+          // Check for co-requisites (labs that go with lectures)
+          const coRequisite = this.findCoRequisite(course, availableCourses, scheduledCourses);
+          if (coRequisite && semesterCredits + coRequisite.credits <= MAX_CREDITS) {
+            semesterCourses.push(coRequisite);
+            semesterCredits += coRequisite.credits;
+            scheduledCourses.add(coRequisite.id);
+            completedCourses.add(coRequisite.id);
+          }
+          
+          // Stop if we've hit target credits
+          if (semesterCredits >= TARGET_CREDITS) break;
+        }
+      }
       
-      const totalCredits = semesterCourses.reduce((sum, course) => sum + course.credits, 0);
-      
-      semesters.push({
-        semester: semesterNumber,
-        semesterName: semesterName,
-        totalCredits: totalCredits,
-        courses: semesterCourses.map(course => ({
-          code: course.id,
-          name: course.name,
-          credits: course.credits,
-          type: course.requirement_type,
-          prerequisites: course.prerequisites || []
-        }))
-      });
+      // Create semester object
+      if (semesterCourses.length > 0) {
+        semesters.push({
+          semester: semesterIndex + 1,
+          semesterName: semesterNames[semesterIndex],
+          totalCredits: semesterCredits,
+          courses: semesterCourses.map(course => ({
+            code: course.id,
+            name: course.name,
+            credits: course.credits,
+            type: course.requirement_type,
+            prerequisites: course.prerequisites || []
+          }))
+        });
+      }
     }
     
-    return {
-      degreePlan: {
-        major: degreeData.major,
-        totalCredits: degreeData.total_credit_hours,
-        semesters: semesters
-      },
-      metadata: {
-        generatedAt: new Date().toISOString(),
-        aiProvider: 'CougarDegree AI',
-        major: degreeData.major,
-        totalSemesters: 8
-      }
-    };
+    return semesters;
   }
 
   /**
-   * Select courses for a specific semester
+   * Check if all prerequisites for a course are met
    */
-  selectCoursesForSemester(semesterNumber, coreCourses, majorCourses, electiveCourses, scienceCourses, allCourses, usedCourseIds) {
-    const courses = [];
-    let totalCredits = 0;
-    const minCredits = 12;
-    const targetCredits = 15;
-    const maxCourses = 5; // Limit to 5 courses per semester
+  arePrerequisitesMet(course, completedCourses) {
+    if (!course.prerequisites || course.prerequisites.length === 0) {
+      return true;
+    }
     
-    // Helper to check if course is available
-    const isAvailable = (course) => !usedCourseIds.has(course.id);
+    // Check if all prerequisites are completed
+    for (const prereq of course.prerequisites) {
+      // Handle "or" prerequisites (e.g., "MATH 2413 or MATH 2313")
+      if (prereq.includes(' or ')) {
+        const options = prereq.split(' or ').map(p => p.trim());
+        const anyCompleted = options.some(opt => completedCourses.has(opt));
+        if (!anyCompleted) return false;
+      } else {
+        if (!completedCourses.has(prereq.trim())) return false;
+      }
+    }
     
-    // Helper to check if we can add more courses
-    const canAddMore = () => courses.length < maxCourses && totalCredits < targetCredits;
-    
-    // Semester 1: Foundation courses
-    if (semesterNumber === 1) {
-      const english1 = coreCourses.find(c => c.id === 'ENGL 1301' && isAvailable(c));
-      const history1 = coreCourses.find(c => c.id === 'HIST 1301' && isAvailable(c));
-      const math1 = allCourses.find(c => c.id === 'MATH 2413' && isAvailable(c));
-      const cosc1 = allCourses.find(c => c.id === 'COSC 1336' && isAvailable(c));
+    return true;
+  }
+
+  /**
+   * Sort courses by priority for scheduling
+   */
+  sortCoursesByPriority(courses, semesterIndex, completedCourses) {
+    return courses.sort((a, b) => {
+      // Priority 1: Required courses before electives
+      const aIsRequired = a.requirement_type?.includes('Core') || 
+                         a.requirement_type?.includes('Prerequisites');
+      const bIsRequired = b.requirement_type?.includes('Core') || 
+                         b.requirement_type?.includes('Prerequisites');
+      if (aIsRequired && !bIsRequired) return -1;
+      if (!aIsRequired && bIsRequired) return 1;
       
-      [english1, history1, math1, cosc1].forEach(course => {
-        if (course && canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      });
-    }
-    
-    // Semester 2: Continue foundation
-    else if (semesterNumber === 2) {
-      const english2 = coreCourses.find(c => c.id === 'ENGL 1302' && isAvailable(c));
-      const history2 = coreCourses.find(c => c.id === 'HIST 1302' && isAvailable(c));
-      const govt1 = coreCourses.find(c => c.id === 'GOVT 2305' && isAvailable(c));
-      const cosc2 = allCourses.find(c => c.id === 'COSC 1437' && isAvailable(c));
+      // Priority 2: Lower level courses first
+      const aLevel = this.getCourseLevel(a.id);
+      const bLevel = this.getCourseLevel(b.id);
+      if (aLevel !== bLevel) return aLevel - bLevel;
       
-      [english2, history2, govt1, cosc2].forEach(course => {
-        if (course && canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      });
-    }
-    
-    // Semester 3-4: Core + Lower level major courses + Science
-    else if (semesterNumber <= 4) {
-      // Add available core courses
-      const availableCore = coreCourses.filter(c => isAvailable(c) && c.level <= 2000);
-      for (const course of availableCore.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+      // Priority 3: Courses with more prerequisites first (they're on the critical path)
+      const aPrereqCount = a.prerequisites?.length || 0;
+      const bPrereqCount = b.prerequisites?.length || 0;
+      if (aPrereqCount !== bPrereqCount) return bPrereqCount - aPrereqCount;
       
-      // Add science courses (Physics/Chemistry for CS/Engineering)
-      const availableScience = scienceCourses.filter(c => 
-        isAvailable(c) && (c.id.includes('PHYS') || c.id.includes('CHEM'))
-      );
-      for (const course of availableScience.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+      // Priority 4: Alphabetical by course code
+      return a.id.localeCompare(b.id);
+    });
+  }
+
+  /**
+   * Extract course level from course ID (e.g., "COSC 3335" -> 3000)
+   */
+  getCourseLevel(courseId) {
+    const match = courseId.match(/(\d)\d{3}/);
+    if (match) {
+      return parseInt(match[1]) * 1000;
+    }
+    return 0;
+  }
+
+  /**
+   * Find co-requisite for a course (e.g., lab for a lecture)
+   */
+  findCoRequisite(course, availableCourses, scheduledCourses) {
+    // Extract course prefix and number (e.g., "PHYS 1301" -> "PHYS", "1301")
+    const match = course.id.match(/([A-Z]+)\s*(\d{4})/);
+    if (!match) return null;
+    
+    const [, prefix, number] = match;
+    const baseNumber = number.substring(0, 3); // "1301" -> "130"
+    
+    // Look for lab course (typically X1YZ for lecture XZYZ)
+    // e.g., PHYS 1301 lecture -> PHYS 1101 lab
+    const labNumber = `${baseNumber.substring(0, 2)}0${number[3]}`;
+    const lectureNumber = `${baseNumber}${number[3]}`;
+    
+    for (const availableCourse of availableCourses) {
+      if (scheduledCourses.has(availableCourse.id)) continue;
       
-      // Add lower-level major courses
-      const availableMajor = majorCourses.filter(c => isAvailable(c) && c.level <= 2000);
-      for (const course of availableMajor.slice(0, 2)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-    }
-    
-    // Semester 5-6: Mix of core, science labs, and mid-level major courses
-    else if (semesterNumber <= 6) {
-      // Add any remaining core courses
-      const availableCore = coreCourses.filter(c => isAvailable(c));
-      for (const course of availableCore.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+      const availableMatch = availableCourse.id.match(/([A-Z]+)\s*(\d{4})/);
+      if (!availableMatch) continue;
       
-      // Add more science courses or labs
-      const availableScience = scienceCourses.filter(c => isAvailable(c));
-      for (const course of availableScience.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+      const [, availablePrefix, availableNumber] = availableMatch;
       
-      // Add 3000-level major courses
-      const available3000 = majorCourses.filter(c => isAvailable(c) && c.level === 3000);
-      for (const course of available3000.slice(0, 2)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
+      // Same prefix?
+      if (availablePrefix !== prefix) continue;
+      
+      // Is this the lab for the lecture or vice versa?
+      if ((course.id.includes(lectureNumber) && availableCourse.id.includes(labNumber)) ||
+          (course.id.includes(labNumber) && availableCourse.id.includes(lectureNumber))) {
+        return availableCourse;
       }
     }
     
-    // Semester 7-8: Advanced major courses
-    else {
-      const advancedCourses = majorCourses.filter(c => isAvailable(c) && c.level >= 3000);
-      for (const course of advancedCourses.slice(0, 4)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-    }
-    
-    // Fill with electives if below minimum credits
-    if (totalCredits < minCredits && electiveCourses && electiveCourses.length > 0) {
-      const availableElectives = electiveCourses.filter(c => isAvailable(c));
-      for (const elective of availableElectives) {
-        if (!canAddMore() || totalCredits >= targetCredits) break;
-        if (totalCredits + elective.credits <= targetCredits) {
-          courses.push(elective);
-          totalCredits += elective.credits;
-        }
-      }
-    }
-    
-    // If still below minimum, add any remaining available courses
-    if (totalCredits < minCredits) {
-      const remainingCourses = allCourses.filter(c => isAvailable(c));
-      for (const course of remainingCourses) {
-        if (!canAddMore() || totalCredits >= minCredits) break;
-        if (totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-    }
-    
-    return courses;
+    return null;
   }
 
   /**
@@ -400,7 +402,7 @@ class DegreePlanningService {
         semesterNames.push(`Fall ${year}`);
         isFall = false; // Next is spring
       } else {
-        semesterNames.push(`Spring ${year + 1}`);
+        semesterNames.push(`Spring ${year}`);
         isFall = true; // Next is fall
         year++; // Increment year after spring
       }
