@@ -342,6 +342,14 @@
       ],
       "requirement_type": "Approved Technical Electives",
       "level": 3000
+    },
+    {
+      "id": "ELECTIVE 1",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
     }
   ]
 }

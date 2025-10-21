@@ -4,12 +4,12 @@
   "total_credit_hours": 120,
   "graduation_rules": [
     "Minimum 2.00 GPA in cumulative, major and minor work to graduate",
-    "C\u2212 rule: maximum of 6 hours of grades below C\u2212 allowed in major courses",
-    "Pre\u2011requisite rule: must earn C\u2212 or better in all prerequisite courses in order to take subsequent courses",
+    "C− rule: maximum of 6 hours of grades below C− allowed in major courses",
+    "Pre‑requisite rule: must earn C− or better in all prerequisite courses in order to take subsequent courses",
     "See residency rule in UH catalog",
-    "Maximum of 6 withdrawals (W\u2019s) allowed during entire undergraduate career",
-    "Minimum of 36 advanced (3000\u2011 or 4000\u2011level) hours and 120 total hours required to graduate",
-    "Maximum of 66 lower\u2011level transfer hours may be applied toward the UH degree"
+    "Maximum of 6 withdrawals (W’s) allowed during entire undergraduate career",
+    "Minimum of 36 advanced (3000‑ or 4000‑level) hours and 120 total hours required to graduate",
+    "Maximum of 66 lower‑level transfer hours may be applied toward the UH degree"
   ],
   "requirements_categories": [
     "Core",
@@ -211,6 +211,182 @@
       ],
       "requirement_type": "Major Electives",
       "level": 4000
+    },
+    {
+      "id": "ELECTIVE 1",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 2",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 3",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 4",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 5",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 6",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 7",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 8",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 9",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 10",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 11",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 12",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 13",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 14",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 15",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 16",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 17",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 18",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 19",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 20",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 21",
+      "name": "Elective - Choose from approved list",
+      "credits": 3,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
+    },
+    {
+      "id": "ELECTIVE 22",
+      "name": "Elective - Choose from approved list",
+      "credits": 2,
+      "prerequisites": [],
+      "requirement_type": "Free Elective",
+      "level": 3000
     }
   ]
 }
