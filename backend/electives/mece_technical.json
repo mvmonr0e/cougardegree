@@ -1,0 +1,106 @@
+{
+  "category": "MECE_TECHNICAL",
+  "description": "Mechanical Engineering Technical Electives (5000-level)",
+  "min_level": 5000,
+  "credit_hours_per_course": 3,
+  "source": "https://publications.uh.edu/preview_program.php?catoid=56&poid=18794",
+  "notes": "Students with senior standing required to take three MECE 5000-level courses OR two MECE 5000-level + one non-MECE 3000+ level from engineering/math/science",
+  "courses": [
+    {
+      "id": "MECE 5331",
+      "name": "Machine Design",
+      "credits": 3,
+      "prerequisites": ["MECE 3338", "MECE 3350"],
+      "level": 5000,
+      "description": "General mechanical design considerations, materials, stress analysis, deflection, statistical analysis, static and variable loading failures"
+    },
+    {
+      "id": "MECE 5333",
+      "name": "Finite Element Analysis",
+      "credits": 3,
+      "prerequisites": ["MECE 3338"],
+      "level": 5000,
+      "description": "Application of finite element methods to mechanical engineering problems"
+    },
+    {
+      "id": "MECE 5334",
+      "name": "Vibrations",
+      "credits": 3,
+      "prerequisites": ["MECE 3344"],
+      "level": 5000,
+      "description": "Theory of vibrations, modeling and analysis of mechanical systems"
+    },
+    {
+      "id": "MECE 5336",
+      "name": "Intermediate Fluid Mechanics",
+      "credits": 3,
+      "prerequisites": ["MECE 3336"],
+      "level": 5000,
+      "description": "Advanced fluid mechanics topics and applications"
+    },
+    {
+      "id": "MECE 5337",
+      "name": "Computational Fluid Dynamics",
+      "credits": 3,
+      "prerequisites": ["MECE 3336", "ENGI 2304"],
+      "level": 5000,
+      "description": "Numerical methods for fluid flow simulation"
+    },
+    {
+      "id": "MECE 5340",
+      "name": "Advanced Thermodynamics",
+      "credits": 3,
+      "prerequisites": ["MECE 3340"],
+      "level": 5000,
+      "description": "Advanced thermodynamic principles and applications"
+    },
+    {
+      "id": "MECE 5342",
+      "name": "Turbomachinery",
+      "credits": 3,
+      "prerequisites": ["MECE 3336", "MECE 3340"],
+      "level": 5000,
+      "description": "Design and analysis of turbomachinery"
+    },
+    {
+      "id": "MECE 5343",
+      "name": "Internal Combustion Engines",
+      "credits": 3,
+      "prerequisites": ["MECE 3340", "MECE 3336"],
+      "level": 5000,
+      "description": "Thermodynamic cycles, combustion, and engine performance"
+    },
+    {
+      "id": "MECE 5344",
+      "name": "Advanced Heat Transfer",
+      "credits": 3,
+      "prerequisites": ["MECE 4334"],
+      "level": 5000,
+      "description": "Advanced conduction, convection, and radiation heat transfer"
+    },
+    {
+      "id": "MECE 5350",
+      "name": "Robotics and Automation",
+      "credits": 3,
+      "prerequisites": ["MECE 3344"],
+      "level": 5000,
+      "description": "Robot kinematics, dynamics, and control systems"
+    },
+    {
+      "id": "MECE 5360",
+      "name": "Advanced Manufacturing",
+      "credits": 3,
+      "prerequisites": ["MECE 3360"],
+      "level": 5000,
+      "description": "Modern manufacturing processes and automation"
+    },
+    {
+      "id": "MECE 5365",
+      "name": "Mechatronics",
+      "credits": 3,
+      "prerequisites": ["MECE 3344", "ENGI 2305"],
+      "level": 5000,
+      "description": "Integration of mechanical, electrical, and computer systems"
+    }
+  ]
+}

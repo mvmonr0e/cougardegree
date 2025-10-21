@@ -1,0 +1,79 @@
+{
+  "category": "CORE_CREATIVE_ARTS",
+  "component_area": "050",
+  "description": "Creative Arts Core Electives",
+  "credit_hours": 3,
+  "source": "https://publications.uh.edu/preview_program.php?catoid=56&poid=19155",
+  "courses": [
+    {
+      "id": "ARTS 1303",
+      "name": "Art History I (Prehistoric to the 14th Century)",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "ARTS 1304",
+      "name": "Art History II (15th Century to the Present)",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "DRAM 1310",
+      "name": "Introduction to Theatre",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "DANC 2303",
+      "name": "Introduction to Dance",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "MUSI 1307",
+      "name": "Listening to Classical Music",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "MUSI 2302",
+      "name": "Listening to Jazz",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "MUSI 3301",
+      "name": "Listening To World Music",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 3000
+    },
+    {
+      "id": "ENGL 2307",
+      "name": "Intro To Drama",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "PHIL 1361",
+      "name": "Philosophy and the Arts",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "ARCH 2350",
+      "name": "History of the Built Environment I",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    }
+  ]
+}

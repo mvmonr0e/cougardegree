@@ -1,0 +1,72 @@
+{
+  "category": "CORE_SOCIAL_BEHAVIORAL",
+  "component_area": "080",
+  "description": "Social & Behavioral Sciences Core Electives",
+  "credit_hours": 3,
+  "source": "https://publications.uh.edu/preview_program.php?catoid=56&poid=19155",
+  "courses": [
+    {
+      "id": "PSYC 2301",
+      "name": "Introduction to Psychology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "SOCI 1301",
+      "name": "Introduction To Sociology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "ECON 2301",
+      "name": "Principles of Macroeconomics",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ECON 2302",
+      "name": "Principles of Microeconomics",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ANTH 2302",
+      "name": "Introduction to Archeology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ANTH 2346",
+      "name": "Introduction to Anthropology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ANTH 2351",
+      "name": "Introduction to Cultural Anthropology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "PSYC 2307",
+      "name": "Psychology of Adolescence",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "PSYC 2308",
+      "name": "Child Development",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    }
+  ]
+}

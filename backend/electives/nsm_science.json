@@ -1,0 +1,79 @@
+{
+  "category": "NSM_SCIENCE",
+  "description": "NSM Natural Science Electives with Labs",
+  "credit_hours_per_pair": 8,
+  "source": "https://publications.uh.edu/preview_program.php?catoid=56&poid=19155",
+  "notes": "Two approved courses in the same discipline from biology, chemistry, earth and atmospheric sciences, or physics",
+  "courses": [
+    {
+      "id": "BIOL 1305",
+      "name": "Human Biology for the Informed Citizen",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "BIOL 2315",
+      "name": "Biology of Food",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "CHEM 1305",
+      "name": "Foundations of Chemistry",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "GEOL 1303",
+      "name": "Physical Geology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "GEOL 1304",
+      "name": "Historical Geology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "GEOL 1340",
+      "name": "Earth Systems",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "GEOL 1345",
+      "name": "Introduction to Oceanography",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "GEOL 1347",
+      "name": "Introduction To Meteorology",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "PHYS 1303",
+      "name": "Stars and Galaxies",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "PHYS 1304",
+      "name": "Solar System",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    }
+  ]
+}

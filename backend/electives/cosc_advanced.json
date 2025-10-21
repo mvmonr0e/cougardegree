@@ -1,0 +1,138 @@
+{
+  "category": "COSC_ADVANCED",
+  "description": "Advanced Computer Science Electives (4000-level)",
+  "min_level": 4000,
+  "credit_hours_per_course": 3,
+  "source": "https://publications.uh.edu/content.php?catoid=52&navoid=19813",
+  "notes": "Students must earn C- or better in all COSC courses. Prerequisites strictly enforced.",
+  "courses": [
+    {
+      "id": "COSC 4315",
+      "name": "Programming Languages and Paradigms",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "level": 4000,
+      "description": "Study of programming language concepts and paradigms"
+    },
+    {
+      "id": "COSC 4351",
+      "name": "Fundamentals of Software Engineering",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "level": 4000,
+      "description": "Software life cycle, requirements, design, testing, maintenance"
+    },
+    {
+      "id": "COSC 4353",
+      "name": "Software Design",
+      "credits": 3,
+      "prerequisites": ["COSC 4351"],
+      "level": 4000,
+      "description": "Advanced software design patterns and architectures"
+    },
+    {
+      "id": "COSC 4354",
+      "name": "Software Development Practices",
+      "credits": 3,
+      "prerequisites": ["COSC 4351", "COSC 4353"],
+      "level": 4000,
+      "description": "Modern software development practices and tools"
+    },
+    {
+      "id": "COSC 4368",
+      "name": "Fundamentals of Artificial Intelligence",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "level": 4000,
+      "description": "AI concepts, search algorithms, machine learning fundamentals"
+    },
+    {
+      "id": "COSC 4377",
+      "name": "Introduction To Computer Networks",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "level": 4000,
+      "description": "Data communications, network protocols and architecture"
+    },
+    {
+      "id": "COSC 4370",
+      "name": "Interactive Computer Graphics",
+      "credits": 3,
+      "prerequisites": ["MATH 2318", "COSC 2436"],
+      "level": 4000,
+      "description": "Introduction to graphics hardware and software systems"
+    },
+    {
+      "id": "COSC 4331",
+      "name": "Real-Time Systems and Embedded Programming",
+      "credits": 3,
+      "prerequisites": ["COSC 3360"],
+      "level": 4000,
+      "description": "Real-time operating systems and embedded system design"
+    },
+    {
+      "id": "COSC 4337",
+      "name": "Data Science II",
+      "credits": 3,
+      "prerequisites": ["COSC 3337"],
+      "level": 4000,
+      "description": "Advanced data science techniques and applications"
+    },
+    {
+      "id": "COSC 4346",
+      "name": "Security Analytics",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "level": 4000,
+      "description": "Security data analysis and threat detection"
+    },
+    {
+      "id": "COSC 4390",
+      "name": "Internet Computing",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "level": 4000,
+      "description": "Web applications, cloud computing, distributed systems"
+    },
+    {
+      "id": "COSC 4393",
+      "name": "Digital Image Processing",
+      "credits": 3,
+      "prerequisites": ["COSC 3320", "MATH 2318"],
+      "level": 4000,
+      "description": "Image processing algorithms and applications"
+    },
+    {
+      "id": "COSC 4364",
+      "name": "Numerical Methods",
+      "credits": 3,
+      "prerequisites": ["COSC 2436", "MATH 2414"],
+      "level": 4000,
+      "description": "Numerical algorithms for scientific computing"
+    },
+    {
+      "id": "COSC 4358",
+      "name": "Introduction to Interactive Game Development",
+      "credits": 3,
+      "prerequisites": ["COSC 2436"],
+      "level": 4000,
+      "description": "Game design and development fundamentals"
+    },
+    {
+      "id": "COSC 4359",
+      "name": "Intermediate Interactive Game Development",
+      "credits": 3,
+      "prerequisites": ["COSC 4358"],
+      "level": 4000,
+      "description": "Advanced game development techniques"
+    },
+    {
+      "id": "COSC 4372",
+      "name": "Fundamentals of Medical Imaging",
+      "credits": 3,
+      "prerequisites": ["COSC 3320"],
+      "level": 4000,
+      "description": "Medical imaging systems and image analysis"
+    }
+  ]
+}

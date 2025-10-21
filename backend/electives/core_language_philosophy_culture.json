@@ -1,0 +1,128 @@
+{
+  "category": "CORE_LANG_PHIL_CULTURE",
+  "component_area": "040",
+  "description": "Language, Philosophy & Culture Core Electives",
+  "credit_hours": 3,
+  "source": "https://publications.uh.edu/preview_program.php?catoid=56&poid=19155",
+  "courses": [
+    {
+      "id": "ENGL 2305",
+      "name": "Intro To Fiction",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ENGL 2306",
+      "name": "Intro To Poetry",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ENGL 2314",
+      "name": "Literature and 21st Century Identities",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ENGL 2315",
+      "name": "Literature and Film",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "ENGL 3306",
+      "name": "Shakespeare-Major Works",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 3000
+    },
+    {
+      "id": "PHIL 1301",
+      "name": "Intro To Philosophy",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "PHIL 1305",
+      "name": "Intro To Ethics",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "HIST 2311",
+      "name": "Western Civilization to 1450",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "HIST 2312",
+      "name": "Western Civilization from 1450",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "HIST 2313",
+      "name": "Global Civilization to 1500",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "HIST 2314",
+      "name": "Global Civilization since 1500",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "RELS 1301",
+      "name": "Introduction To Religious Studies",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 1000
+    },
+    {
+      "id": "RELS 2330",
+      "name": "Judaism",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "RELS 2350",
+      "name": "Introduction to Islam",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "RELS 2360",
+      "name": "Buddhist Traditions: An Introduction",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 2000
+    },
+    {
+      "id": "CLAS 3307",
+      "name": "Greek & Roman Myths of Heroes",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 3000
+    },
+    {
+      "id": "CLAS 3308",
+      "name": "Myths & Cult of the Greek Gods",
+      "credits": 3,
+      "prerequisites": [],
+      "level": 3000
+    }
+  ]
+}
