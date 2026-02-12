@@ -450,7 +450,17 @@ class CougarDegreePlanner {
             // Clear existing options except the first one
             majorSelect.innerHTML = '<option value="">Select your major</option>';
             
-            majors.forEach(major => {
+            // Sort majors to put Computer Science first
+            const sortedMajors = [...majors].sort((a, b) => {
+                // Put "B.S. in Computer Science" first
+                if (a === 'B.S. in Computer Science') return -1;
+                if (b === 'B.S. in Computer Science') return 1;
+                
+                // Keep other majors in alphabetical order
+                return a.localeCompare(b);
+            });
+            
+            sortedMajors.forEach(major => {
                 const option = document.createElement('option');
                 option.value = major; // Use full major name as value
                 option.textContent = major;

@@ -182,8 +182,7 @@ class DegreePlanningService {
         usedCourseIds
       );
       
-      // Mark courses as used
-      semesterCourses.forEach(course => usedCourseIds.add(course.id));
+      // Courses are already marked as used in addCourse function
       
       const totalCredits = semesterCourses.reduce((sum, course) => sum + course.credits, 0);
       
@@ -224,138 +223,129 @@ class DegreePlanningService {
     let totalCredits = 0;
     const minCredits = 12;
     const targetCredits = 15;
-    const maxCourses = 5; // Limit to 5 courses per semester
+    const maxCourses = 7; // Limit to 7 courses per semester
     
     // Helper to check if course is available
     const isAvailable = (course) => !usedCourseIds.has(course.id);
     
+    // Helper to check if prerequisites are satisfied
+    const prerequisitesSatisfied = (course) => {
+      if (!course.prerequisites || course.prerequisites.length === 0) return true;
+      return course.prerequisites.every(prereq => usedCourseIds.has(prereq));
+    };
+    
     // Helper to check if we can add more courses
     const canAddMore = () => courses.length < maxCourses && totalCredits < targetCredits;
     
+    // Helper to add course if possible
+    const addCourse = (course) => {
+      if (course && isAvailable(course) && prerequisitesSatisfied(course) && 
+          canAddMore() && totalCredits + course.credits <= targetCredits) {
+        courses.push(course);
+        totalCredits += course.credits;
+        usedCourseIds.add(course.id); // Mark as used immediately
+        return true;
+      }
+      return false;
+    };
+    
     // Semester 1: Foundation courses
     if (semesterNumber === 1) {
-      const english1 = coreCourses.find(c => c.id === 'ENGL 1301' && isAvailable(c));
-      const history1 = coreCourses.find(c => c.id === 'HIST 1301' && isAvailable(c));
-      const math1 = allCourses.find(c => c.id === 'MATH 2413' && isAvailable(c));
-      const cosc1 = allCourses.find(c => c.id === 'COSC 1336' && isAvailable(c));
-      
-      [english1, history1, math1, cosc1].forEach(course => {
-        if (course && canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      });
+      addCourse(coreCourses.find(c => c.id === 'ENGL 1301'));
+      addCourse(coreCourses.find(c => c.id === 'HIST 1301'));
+      addCourse(allCourses.find(c => c.id === 'MATH 2413'));
+      addCourse(allCourses.find(c => c.id === 'COSC 1336'));
     }
     
     // Semester 2: Continue foundation
     else if (semesterNumber === 2) {
-      const english2 = coreCourses.find(c => c.id === 'ENGL 1302' && isAvailable(c));
-      const history2 = coreCourses.find(c => c.id === 'HIST 1302' && isAvailable(c));
-      const govt1 = coreCourses.find(c => c.id === 'GOVT 2305' && isAvailable(c));
-      const cosc2 = allCourses.find(c => c.id === 'COSC 1437' && isAvailable(c));
-      
-      [english2, history2, govt1, cosc2].forEach(course => {
-        if (course && canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      });
+      addCourse(coreCourses.find(c => c.id === 'ENGL 1302'));
+      addCourse(coreCourses.find(c => c.id === 'HIST 1302'));
+      addCourse(coreCourses.find(c => c.id === 'GOVT 2305'));
+      addCourse(allCourses.find(c => c.id === 'COSC 1437'));
     }
     
-    // Semester 3-4: Core + Lower level major courses + Science
-    else if (semesterNumber <= 4) {
-      // Add available core courses
-      const availableCore = coreCourses.filter(c => isAvailable(c) && c.level <= 2000);
-      for (const course of availableCore.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-      
-      // Add science courses (Physics/Chemistry for CS/Engineering)
-      const availableScience = scienceCourses.filter(c => 
-        isAvailable(c) && (c.id.includes('PHYS') || c.id.includes('CHEM'))
-      );
-      for (const course of availableScience.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-      
-      // Add lower-level major courses
-      const availableMajor = majorCourses.filter(c => isAvailable(c) && c.level <= 2000);
-      for (const course of availableMajor.slice(0, 2)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+    // Semester 3: Core + Math + Science
+    else if (semesterNumber === 3) {
+      addCourse(coreCourses.find(c => c.id === 'GOVT 2306'));
+      addCourse(allCourses.find(c => c.id === 'MATH 2414'));
+      addCourse(allCourses.find(c => c.id === 'MATH 2318'));
+      addCourse(scienceCourses.find(c => c.id === 'PHYS 1301'));
     }
     
-    // Semester 5-6: Mix of core, science labs, and mid-level major courses
-    else if (semesterNumber <= 6) {
-      // Add any remaining core courses
-      const availableCore = coreCourses.filter(c => isAvailable(c));
-      for (const course of availableCore.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-      
-      // Add more science courses or labs
-      const availableScience = scienceCourses.filter(c => isAvailable(c));
-      for (const course of availableScience.slice(0, 1)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
-      
-      // Add 3000-level major courses
-      const available3000 = majorCourses.filter(c => isAvailable(c) && c.level === 3000);
-      for (const course of available3000.slice(0, 2)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+    // Semester 4: Science lab + Math + CS courses
+    else if (semesterNumber === 4) {
+      addCourse(scienceCourses.find(c => c.id === 'PHYS 1101'));
+      addCourse(allCourses.find(c => c.id === 'MATH 2305'));
+      addCourse(allCourses.find(c => c.id === 'COSC 2436'));
+      addCourse(allCourses.find(c => c.id === 'COSC 2425'));
     }
     
-    // Semester 7-8: Advanced major courses
-    else {
-      const advancedCourses = majorCourses.filter(c => isAvailable(c) && c.level >= 3000);
-      for (const course of advancedCourses.slice(0, 4)) {
-        if (canAddMore() && totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
-      }
+    // Semester 5: More science + Math + CS courses
+    else if (semesterNumber === 5) {
+      addCourse(scienceCourses.find(c => c.id === 'PHYS 1302'));
+      addCourse(scienceCourses.find(c => c.id === 'PHYS 1102'));
+      addCourse(allCourses.find(c => c.id === 'MATH 3339'));
+      addCourse(allCourses.find(c => c.id === 'COSC 3320'));
+      // Add chemistry courses to reach 120 credits
+      addCourse(scienceCourses.find(c => c.id === 'CHEM 1331'));
     }
     
-    // Fill with electives if below minimum credits
-    if (totalCredits < minCredits && electiveCourses && electiveCourses.length > 0) {
-      const availableElectives = electiveCourses.filter(c => isAvailable(c));
+    // Semester 6: Advanced CS courses + Science
+    else if (semesterNumber === 6) {
+      addCourse(allCourses.find(c => c.id === 'COSC 3336'));
+      addCourse(allCourses.find(c => c.id === 'COSC 3340'));
+      addCourse(allCourses.find(c => c.id === 'COSC 3360'));
+      addCourse(allCourses.find(c => c.id === 'COSC 3380'));
+      // Add more science courses
+      addCourse(scienceCourses.find(c => c.id === 'CHEM 1111'));
+      // Add biology courses
+      addCourse(scienceCourses.find(c => c.id === 'BIOL 1306'));
+      addCourse(scienceCourses.find(c => c.id === 'BIOL 1106'));
+    }
+    
+    // Semester 7: Software Engineering courses + Science
+    else if (semesterNumber === 7) {
+      addCourse(allCourses.find(c => c.id === 'COSC 4351'));
+      addCourse(allCourses.find(c => c.id === 'COSC 4353'));
+      addCourse(allCourses.find(c => c.id === 'COSC 4354'));
+      // Add more science courses
+      addCourse(scienceCourses.find(c => c.id === 'CHEM 1332'));
+      addCourse(scienceCourses.find(c => c.id === 'CHEM 1112'));
+      // Add biology courses that require BIOL 1306
+      addCourse(scienceCourses.find(c => c.id === 'BIOL 1307'));
+      addCourse(scienceCourses.find(c => c.id === 'BIOL 1107'));
+    }
+    
+    // Semester 8: Remaining electives and capstone + Science
+    else if (semesterNumber === 8) {
+      const availableElectives = electiveCourses.filter(c => isAvailable(c) && prerequisitesSatisfied(c));
       for (const elective of availableElectives) {
-        if (!canAddMore() || totalCredits >= targetCredits) break;
-        if (totalCredits + elective.credits <= targetCredits) {
-          courses.push(elective);
-          totalCredits += elective.credits;
+        addCourse(elective);
+      }
+      
+      // Add any remaining science courses
+      const remainingScience = scienceCourses.filter(c => isAvailable(c) && prerequisitesSatisfied(c));
+      for (const course of remainingScience) {
+        addCourse(course);
+      }
+      
+      // If still below minimum, add any remaining courses
+      if (totalCredits < minCredits) {
+        const remainingCourses = allCourses.filter(c => isAvailable(c) && prerequisitesSatisfied(c));
+        for (const course of remainingCourses) {
+          addCourse(course);
+          if (totalCredits >= minCredits) break;
         }
       }
     }
     
-    // If still below minimum, add any remaining available courses
+    // Fill with any remaining courses if below minimum credits
     if (totalCredits < minCredits) {
-      const remainingCourses = allCourses.filter(c => isAvailable(c));
+      const remainingCourses = allCourses.filter(c => isAvailable(c) && prerequisitesSatisfied(c));
       for (const course of remainingCourses) {
-        if (!canAddMore() || totalCredits >= minCredits) break;
-        if (totalCredits + course.credits <= targetCredits) {
-          courses.push(course);
-          totalCredits += course.credits;
-        }
+        if (totalCredits >= minCredits) break;
+        addCourse(course);
       }
     }
     
