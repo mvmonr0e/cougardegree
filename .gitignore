@@ -22,19 +22,19 @@ Thumbs.db
 .env*
 
 # Frontend specific
-/frontend/node_modules/
-/frontend/dist/
-/frontend/build/
-/frontend/.env
-/frontend/.env*
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env*
 
 # Backend specific
-/backend/node_modules/
-/backend/dist/
-/backend/build/
-/backend/.env
-/backend/.env*
-/backend/logs/
+backend/node_modules/
+backend/dist/
+backend/build/
+backend/.env
+backend/.env*
+backend/logs/
 
 # Ignore IDE folders
 .vscode/
