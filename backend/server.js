@@ -9,6 +9,9 @@ const degreePlanningService = require('./services/degreePlanningService');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// shortcut: the AI prompt only knows the CS course list, add majors back once the prompt is built per major
+const MAJORS = ['Computer Science'];
+
 // Security middleware
 app.use(helmet());
 app.use(cors({
@@ -43,9 +46,9 @@ app.post('/api/degree-plan', async (req, res) => {
     const { major, credits, preferences, currentCourses } = req.body;
     
     // Validate required fields
-    if (!major) {
-      return res.status(400).json({ 
-        error: 'Major is required' 
+    if (!MAJORS.includes(major)) {
+      return res.status(400).json({
+        error: `Major must be one of: ${MAJORS.join(', ')}`
       });
     }
 
@@ -74,31 +77,9 @@ app.post('/api/degree-plan', async (req, res) => {
 
 // Get available majors
 app.get('/api/majors', (req, res) => {
-  const majors = [
-    'Computer Science',
-    'Software Engineering',
-    'Data Science',
-    'Information Technology',
-    'Cybersecurity',
-    'Computer Information Systems',
-    'Management Information Systems',
-    'Business Administration',
-    'Marketing',
-    'Finance',
-    'Accounting',
-    'Psychology',
-    'Biology',
-    'Chemistry',
-    'Mathematics',
-    'Physics',
-    'Engineering',
-    'Nursing',
-    'Education'
-  ];
-  
   res.json({
     success: true,
-    data: majors
+    data: MAJORS
   });
 });
 
